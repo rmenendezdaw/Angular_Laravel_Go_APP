@@ -1,0 +1,21 @@
+/node_modules
+/bower_components
+.classpath
+/.idea
+.launch
+.settings/
+.project
+
+#System Files
+.DS_Store
+Thumbs.db
+
+vendor/
+!vendor/vendor.json
+
+tmp/*
+gorm.db
+coverage.txt
+
+bak.*
+*.pem
