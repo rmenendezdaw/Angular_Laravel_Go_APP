@@ -11,7 +11,7 @@
 Thumbs.db
 
 vendor/
-!vendor/vendor.json
+!vendor.json
 
 tmp/*
 gorm.db
