@@ -19,11 +19,11 @@ export class SongsService {
     const params = {};
 
 
-    return this.apiService.get('/songs', 'go_be');
+    return this.apiService.get('/songs', 'laravel_be');
   }// end_query
 
   get(slug): Observable<Song> {
-    return this.apiService.get('/songs/' + slug)
+    return this.apiService.get('/song/' + slug)
       .pipe(map(data => data.song));
   }// end_get
 }
