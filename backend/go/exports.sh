@@ -4,11 +4,11 @@ echo 'export GOROOT=/usr/local/go'
 
 #GOPATH is the location of your work directory
 
-echo 'export GOPATH=$HOME/Escritorio/Desarrollo_servidor/Go_Laravel_Angular/Angular_Laravel_Go_APP/backend/go/GinGonic'
+echo 'export GOPATH=$HOME/Escritorio/Desarrollo_servidor/Go_Laravel_Angular/Angular_Laravel_Go_APP/backend/go'
 
 
 #Now set the PATH variable to access go binary system wide
-echo 'export PATH=$PATH:/home/raul/Escritorio/Desarrollo_servidor/Go_Laravel_Angular/Angular_Laravel_Go_APP/backend/go/GinGonic/bin'
+echo 'export PATH=$PATH:/home/raul/Escritorio/Desarrollo_servidor/Go_Laravel_Angular/Angular_Laravel_Go_APP/backend/go/bin'
 
 echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH'
 

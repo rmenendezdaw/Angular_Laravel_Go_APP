@@ -18,11 +18,11 @@ export class SongsService {
   query(): Observable<{songs: Song[]}> {
     const params = {};
 
-    return this.apiService.get('/song', 'go_be');
+    return this.apiService.get('/songs', 'go_be');
   }// end_query
 
   get(slug): Observable<Song> {
-    return this.apiService.get('/song/' + slug)
+    return this.apiService.get('/songs/' + slug)
       .pipe(map(data => data.song));
   }// end_get
 }
