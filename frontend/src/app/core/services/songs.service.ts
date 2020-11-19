@@ -15,7 +15,7 @@ export class SongsService {
   constructor(private apiService: ApiService) { 
   }
 
-  query(): Observable<{songs: Song[]}> {
+  query(): Observable<Song[]> {
     const params = {};
 
 

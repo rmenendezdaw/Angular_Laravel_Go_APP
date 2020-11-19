@@ -1,1 +1,131 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap');
+
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#container-tagList {
+    padding: 25px 150px;
+    flex: 1 1 30%
+}
+.home-tittle {
+    font-family: Staatliches;
+    font-size: 48px;
+}
+.row-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.row-container .row-item {
+    flex: 1 1 50%;
+    max-width: 50%;
+}
+.row-container .row-item div {
+    padding: 25px 0;
+    margin: 15px;
+    box-shadow: 0 2px 5px 0 rgba(78, 78, 78, 0.2), 0 2px 6px 0  rgba(78, 78, 78, 0.2);
+    cursor: pointer;
+    text-align: center;
+    font-family: "Baloo Tamma 2";
+    font-size: 28px;
+}
+.row-container .row-item div:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.19);
+}
+.row-song {
+    padding: 15px 25px;
+    box-shadow: 0 2px 5px 0 rgba(78, 78, 78, 0.2), 0 2px 6px 0  rgba(78, 78, 78, 0.2);
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+.row-song:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.19);
+}
+
+.navbar-brand {
+    font-size: 2.5rem!important;
+    color: #ffa200!important;
+}
+.navbar {
+    padding-top: 25px;
+}
+.nav li a:focus, .nav li a:hover {
+    background-color: #FFF!important;
+}
+.container-song-list {
+    display: flex;
+    align-items: center;
+}
+
+.container-song-list .item {
+    flex: 1 1 50%;
+}
+
+.nav-link {
+    font-family: "Baloo Tamma 2"!important;
+    font-size: 18px;
+}
+
+.btn-outline-primary {
+    color: rgb(95, 95, 95)!important;
+}
+.btn-outline-primary:hover  {
+    background-color: #ffa200;
+    border-color: #ffa200;
+}
+.btn-outline-primary:active {
+    background-color: #ffa200;
+    border-color: #ffa200;
+}
+.btn-outline-primary:focus {
+    background-color: #ffa200;
+    border-color: #ffa200;
+}
+
+.page-item.active .page-link, .page-item.active .page-link:focus, .page-item.active .page-link:hover {
+    background-color: #ffa200!important;
+    border-color: #ffa200!important;
+}
+
+.nav-pills.outline-active .nav-link.active {
+    color: #ffa200!important;
+    border-color: #ffa200!important;
+}
+
+.btn-playit {
+    text-transform: uppercase;
+    font-family: "Baloo Tamma 2";
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #333;
+    color: #FFF;
+    padding: 5px 15px;
+    border-radius: 5%;
+    transition: 0.5s;
+}
+.btn-playit:hover {
+    background-color: rgb(75, 75, 75);
+}
+.btn-playit--home {
+    /* padding-left: 35px; */
+    margin-left: auto;
+}
+.group__box {
+    padding: 25px 5px;
+    margin: 15px;
+    box-shadow: 0 2px 5px 0 rgba(78, 78, 78, 0.2), 0 2px 6px 0  rgba(78, 78, 78, 0.2);
+    cursor: pointer;
+    text-align: center;
+    font-family: "Baloo Tamma 2";
+    font-size: 28px;
+    /* max-width: 33%; */
+    flex: 1 1 33%;
+}
+
+.group__box:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.19);
+}

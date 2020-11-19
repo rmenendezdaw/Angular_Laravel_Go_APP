@@ -1,3 +1,12 @@
-<p>
-  songs works!
-</p>
+<div class = "article-meta row-song" *ngFor="let song of result">
+  <div class = "container-song-list" ng-click = "$ctrl.opendt()">
+      <div class = "ite" style = "padding-right: 25px;">
+          <img style = "width: 65px!important; height: 65px!important;">
+      </div>
+      <div class = "ite">
+          <div>{{song.title}}</div>
+          <div>{{song.artist}}</div>
+          <div>{{song.releaseDate}}</div>
+      </div>
+  </div>
+</div>

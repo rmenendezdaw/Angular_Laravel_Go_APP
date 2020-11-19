@@ -10,10 +10,13 @@ export class SongsComponent implements OnInit {
   constructor(
     private songsService: SongsService) { }
 
+  result: Song[];
+
   ngOnInit() {
-    console.log('holi');
     this.songsService.query().subscribe(data => {
-      console.log(data);
+      this.result = data;
+
+      console.log(this.result);
     })
   }
 
