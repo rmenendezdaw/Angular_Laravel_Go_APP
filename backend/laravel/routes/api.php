@@ -13,11 +13,7 @@
 
 Route::group(['namespace' => 'Api'], function () {
 
-    Route::post('/song', 'SongController@create');
-    Route::get('/songs', 'SongController@show');
-    Route::get('/song/{id}', 'SongController@showSong');
-    Route::put('/song/{id}', 'SongController@update');
-    Route::delete('/song/{id}', 'SongController@delete');
+    Route::resource('songs', 'SongController');
 
     Route::post('users/login', 'AuthController@login');
     Route::post('users', 'AuthController@register');

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Song;
 
 class SongController extends Controller {
-    public function create(Request $request) {
+    public function store(Request $request) {
         $song = new Song();
 
         $song -> title = $request -> title;
@@ -22,13 +22,13 @@ class SongController extends Controller {
         return response() -> json($song);
     }// end_create
 
-    public function show() {
+    public function index() {
         $songs = Song::all();
 
         return response() -> json($songs);
     }// end_show
 
-    public function showSong($id) {
+    public function show($id) {
         $song = Song::find($id);
 
         return response() -> json($song);
@@ -51,7 +51,7 @@ class SongController extends Controller {
         return response() -> json($song);
     }// end_update
 
-    public function delete($id) {
+    public function destroy($id) {
         $song = Song::find($id);
         
         if (!$song) return response() -> json('Not Found');
