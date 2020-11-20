@@ -36,9 +36,9 @@ func BuildDBConfig() *DBConfig {
 	dbConfig := DBConfig{
 		Host:     "localhost",
 		Port:     3306,
-		User:     "raul",
-		Password: "hELLO@fRIEND2",
-		DBName:   "first_go",
+		User:     "laravel_go",
+		Password: "laravel_go",
+		DBName:   "laravel_go",
 	}
 	// fmt.Println(&dbConfig)
 	return &dbConfig
