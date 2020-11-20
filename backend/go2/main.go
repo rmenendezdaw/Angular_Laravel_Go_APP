@@ -3,11 +3,23 @@ package main
 import (
 	"fmt"
 
-
-	"github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go2/common"
 	"github.com/gin-gonic/gin"
-
+	"github.com/jinzhu/gorm"
+	"github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go2/songs"
+	"github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go2/articles"
+	"github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go2/common"
+	"github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go2/users"
 )
+
+func Migrate(db *gorm.DB) {
+	// users.AutoMigrate()
+	// db.AutoMigrate(&articles.ArticleModel{})
+	db.AutoMigrate(&songs.Songs{})
+	// db.AutoMigrate(&articles.TagModel{})
+	// db.AutoMigrate(&articles.FavoriteModel{})
+	// db.AutoMigrate(&articles.ArticleUserModel{})
+	// db.AutoMigrate(&articles.CommentModel{})
+}
 
 func main() {
 	db := common.Init()
@@ -20,15 +32,17 @@ func main() {
 
 	v1 := r.Group("/api")
 
-	// users.UsersRegister(v1.Group("/users"))
-	// v1.Use(users.AuthMiddleware(false))
-	// articles.ArticlesAnonymousRegister(v1.Group("/articles"))
-	// articles.TagsAnonymousRegister(v1.Group("/tags"))
+	songs.SongsRegister(v1.Group("/songs"))
+	songs.SongsAnonymousRegister(v1.Group("/songs"))
 
-	// v1.Use(users.AuthMiddleware(true))
-	// users.UserRegister(v1.Group("/user"))
-	// users.ProfileRegister(v1.Group("/profiles"))
-	// articles.ArticlesRegister(v1.Group("/articles"))
+	users.UsersRegister(v1.Group("/users"))
+	v1.Use(users.AuthMiddleware(false))
+	articles.ArticlesAnonymousRegister(v1.Group("/articles"))
+	articles.TagsAnonymousRegister(v1.Group("/tags"))
+	v1.Use(users.AuthMiddleware(true))
+	users.UserRegister(v1.Group("/user"))
+	users.ProfileRegister(v1.Group("/profiles"))
+	articles.ArticlesRegister(v1.Group("/articles"))
 
 	fmt.Printf("0.0.0.0:3000")
 	r.Run(":3000")
@@ -47,12 +61,9 @@ func MakeRoutes(r *gin.Engine) {
 		}
 		c.Next()
 
-		/*
-			fmt.Printf("c.Request.Method \n")
-			fmt.Printf(c.Request.Method)
+		
 			fmt.Printf("c.Request.RequestURI \n")
 			fmt.Printf(c.Request.RequestURI)
-		*/
 	}
 	r.Use(cors)
 }

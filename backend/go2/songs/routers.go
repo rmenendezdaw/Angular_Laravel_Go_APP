@@ -11,7 +11,6 @@ import (
 
 func SongsRegister(router *gin.RouterGroup) {
 	router.POST("/", SongCreate)
-	router.GET("/", SongList)
 	router.PUT("/:id", SongUpdate)
 	router.DELETE("/:id", SongDelete)
 	router.DELETE("/", SongDeleteAll)
@@ -20,85 +19,69 @@ func SongsRegister(router *gin.RouterGroup) {
 
 func SongsAnonymousRegister(router *gin.RouterGroup) {
 	router.GET("/", SongList)
-	router.GET("/:id", SongRetrieve)
-}
-
-func TagsAnonymousRegister(router *gin.RouterGroup) {
-	router.GET("/", TagList)
+	router.GET("/:id", SongById)
 }
 
 func SongCreate(c *gin.Context) {
-	songModelValidator := NewSongModelValidator()
-	if err := songModelValidator.Bind(c); err != nil {
-		c.JSON(http.StatusUnprocessableEntity, common.NewValidatorError(err))
-		return
-	}
-	//fmt.Println(songModelValidator.songModel.Author.UserModel)
+	var song Songs
+	c.BindJSON(&song);
 
-	if err := SaveOne(&songModelValidator.songModel); err != nil {
-		c.JSON(http.StatusUnprocessableEntity, common.NewError("database", err))
+	err := CreateSong(&song)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, gin.H{"song": song})
 		return
 	}
-	serializer := SongSerializer{c, songModelValidator.songModel}
-	c.JSON(http.StatusCreated, gin.H{"song": serializer.Response()})
 }
 
 func SongList(c *gin.Context) {
-	//condition := SongModel{}
-	tag := c.Query("tag")
-	author := c.Query("author")
-	favorited := c.Query("favorited")
-	limit := c.Query("limit")
-	offset := c.Query("offset")
-	songModels, modelCount, err := FindManySong(tag, author, limit, offset, favorited)
+	var song []Songs
+	err := GetAllSongs(&song)
 	if err != nil {
-		c.JSON(http.StatusNotFound, common.NewError("songs", errors.New("Invalid param")))
-		return
+		c.JSON(http.StatusOK, "Not found")
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, song)
 	}
-	serializer := SongsSerializer{c, songModels}
-	c.JSON(http.StatusOK, gin.H{"songs": serializer.Response(), "songsCount": modelCount})
 }
 
-func SongRetrieve(c *gin.Context) {
-	slug := c.Param("slug")
-	if slug == "feed" {
-		SongFeed(c)
-		return
-	}
-	songModel, err := FindOneSong(&SongModel{Slug: slug})
+func SongById(c *gin.Context) {
+	id := c.Params.ByName("id")
+	var song Songs
+	err := GetSongByID(&song, id)
 	if err != nil {
-		c.JSON(http.StatusNotFound, common.NewError("songs", errors.New("Invalid slug")))
+		c.JSON(http.StatusOK, "Not found")
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, gin.H{"song": song})
 		return
 	}
-	serializer := SongSerializer{c, songModel}
-	c.JSON(http.StatusOK, gin.H{"song": serializer.Response()})
 }
 
 func SongUpdate(c *gin.Context) {
-	slug := c.Param("slug")
-	songModel, err := FindOneSong(&SongModel{Slug: slug})
-	if err != nil {
-		c.JSON(http.StatusNotFound, common.NewError("songs", errors.New("Invalid slug")))
-		return
+	var song Songs
+	id := c.Params.ByName("id")
+	err := GetSongByID(&song, id) 
+	if err != nil { 
+		c.JSON(http.StatusNotFound, "NOT FOUND")
+	}else{ 
+		c.BindJSON(&song)
+		err = UpdateSong(&song) 
+		if err != nil {
+			c.JSON(http.StatusOK, "Not found")
+			c.AbortWithStatus(http.StatusNotFound)
+		} else {
+			c.JSON(http.StatusOK, gin.H{"song": song})
+			return
+		}
 	}
-	songModelValidator := NewSongModelValidatorFillWith(songModel)
-	if err := songModelValidator.Bind(c); err != nil {
-		c.JSON(http.StatusUnprocessableEntity, common.NewValidatorError(err))
-		return
-	}
-
-	songModelValidator.songModel.ID = songModel.ID
-	if err := songModel.Update(songModelValidator.songModel); err != nil {
-		c.JSON(http.StatusUnprocessableEntity, common.NewError("database", err))
-		return
-	}
-	serializer := SongSerializer{c, songModel}
-	c.JSON(http.StatusOK, gin.H{"song": serializer.Response()})
 }
 
 func SongDelete(c *gin.Context) {
-	slug := c.Param("slug")
-	err := DeleteSongModel(&SongModel{Slug: slug})
+	var song Songs
+	id := c.Params.ByName("id")
+	err := DeleteSong(&song, id)
 	if err != nil {
 		c.JSON(http.StatusNotFound, common.NewError("songs", errors.New("Invalid slug")))
 		return
@@ -111,15 +94,7 @@ func SongDeleteAll(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusOK, "Not found")
 	} else {
-		c.JSON(http.StatusOK, "Truncate song")
+		c.JSON(http.StatusOK, "DELETED ALL songs")
 	}
 }
-func TagList(c *gin.Context) {
-	tagModels, err := getAllTags()
-	if err != nil {
-		c.JSON(http.StatusNotFound, common.NewError("songs", errors.New("Invalid param")))
-		return
-	}
-	serializer := TagsSerializer{c, tagModels}
-	c.JSON(http.StatusOK, gin.H{"tags": serializer.Response()})
-}
+

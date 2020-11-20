@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type Database struct {
@@ -20,15 +20,18 @@ func Init() *gorm.DB {
 		fmt.Println("db err: ", err)
 	}
 	db.DB().SetMaxIdleConns(10)
-	db.LogMode(true)
+	// db.LogMode(true)
 	DB = db
 	return DB
 }
-
-// Using this function to get a connection, you can create your connection pool here.
-func GetDB() *gorm.DB {
-	return DB
+type DBConfig struct {
+	Host     string
+	Port     int
+	User     string
+	DBName   string
+	Password string
 }
+// Using this function to get a connection, you can create your connection pool here.
 func BuildDBConfig() *DBConfig {
 	dbConfig := DBConfig{
 		Host:     "localhost",
@@ -49,4 +52,8 @@ func DbURL(dbConfig *DBConfig) string {
 		dbConfig.Port,
 		dbConfig.DBName,
 	)
+}
+
+func GetDB() *gorm.DB {
+	return DB
 }

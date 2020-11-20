@@ -1,12 +1,5 @@
 package songs
 
-import (
-	"fmt"
-	"github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go2/common"
-	"strconv"
-	"github.com/jinzhu/gorm"
-)
-
 type Songs struct {
 	Id          uint   `json:"id"`
 	Title       string `json:"title"`
@@ -16,4 +9,4 @@ type Songs struct {
 	Duration    string `json:"duration"`
 	Genre       string `json:"genre"`
 }
-}
+
