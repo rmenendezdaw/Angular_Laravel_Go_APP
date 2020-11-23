@@ -12,7 +12,7 @@ class SongController extends Controller {
 
         $song -> title = $request -> title;
         $song -> artist = $request -> artist;
-        $song -> releaseDate = $request -> releaseDate;
+        $song -> release_date = $request -> release_date;
         $song -> album = $request -> album;
         $song -> duration = $request -> duration;
         $song -> genre = $request -> genre;

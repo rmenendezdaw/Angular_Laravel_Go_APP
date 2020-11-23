@@ -17,12 +17,12 @@ class Songs extends Migration
             $table -> increments('id');
             $table -> string('title');
             $table -> string('artist');
-            $table -> string('releaseDate');
+            $table -> string('release_date');
             $table -> string('album') -> nullable();
             $table -> integer('duration');
             $table -> string('genre');
-            // $table -> rememberToken();
-            // $table -> timestamps();
+            $table -> rememberToken();
+            $table -> timestamps();
         });
     }
 
