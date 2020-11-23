@@ -62,8 +62,8 @@ func MakeRoutes(r *gin.Engine) {
 		c.Next()
 
 		
-			fmt.Printf("c.Request.RequestURI \n")
-			fmt.Printf(c.Request.RequestURI)
+			// fmt.Printf("c.Request.RequestURI \n")
+			// fmt.Printf(c.Request.RequestURI)
 	}
 	r.Use(cors)
 }
