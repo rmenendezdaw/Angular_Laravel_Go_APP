@@ -13,6 +13,9 @@
 
 Route::group(['namespace' => 'Api'], function () {
 
+    Route::resource('songs', 'SongController');
+
+
     Route::post('users/login', 'AuthController@login');
     Route::post('users', 'AuthController@register');
 
