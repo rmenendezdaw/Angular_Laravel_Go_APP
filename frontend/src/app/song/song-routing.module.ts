@@ -8,7 +8,7 @@ const routes: Routes = [
     path: ':id',
     component: SongComponent,
     resolve: {
-      song: SongResolver
+      song: SongResolver,
     }
   }
 ];

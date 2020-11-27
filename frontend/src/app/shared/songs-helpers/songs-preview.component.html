@@ -1,4 +1,4 @@
-<div class = "article-meta row-song">
+<div class = "song-meta row-song" [routerLink]="['/songs', song.id ]" >
   <div class = "container-song-list">
       <div class = "ite" style = "padding-right: 25px;">
           <img style = "width: 65px!important; height: 65px!important;">
@@ -9,4 +9,3 @@
       </div>
   </div>
 </div>
-<a [routerLink]="['/song', song.id ]" class="preview-link">
