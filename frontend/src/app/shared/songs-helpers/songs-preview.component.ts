@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { Song } from '../../core';
 
@@ -6,16 +6,12 @@ import { Song } from '../../core';
   selector: 'app-songs-preview',
   templateUrl: './songs-preview.component.html'
 })
-export class SongPreviewComponent {
+export class SongsPreviewComponent implements OnInit{
   @Input() song: Song;
-
-  onToggleFavorite(favorited: boolean) {
-    this.song['favorited'] = favorited;
-
-    if (favorited) {
-      this.song['favoritesCount']++;
-    } else {
-      this.song['favoritesCount']--;
-    }
+  ngOnInit() {
+    this.song
+      console.log("SONG")
+      console.log(this.song);
+    
   }
 }

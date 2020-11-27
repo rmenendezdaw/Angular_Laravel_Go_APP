@@ -26,4 +26,7 @@ export class SongsService {
     return this.apiService.get('/song/' + slug)
       .pipe(map(data => data.song));
   }// end_get
+  destroy(slug) {
+    return this.apiService.delete('/song/' + slug);
+  }
 }
