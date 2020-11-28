@@ -4,7 +4,6 @@
 /public/storage
 /storage/*.key
 /vendor
-/config/jwt.php
 /.idea
 /.vagrant
 Homestead.json

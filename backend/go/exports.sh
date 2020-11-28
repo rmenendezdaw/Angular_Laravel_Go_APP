@@ -12,3 +12,5 @@ echo 'export PATH=$PATH:/home/raul/Escritorio/Desarrollo_servidor/go_projects/bi
 
 echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH'
 
+
+

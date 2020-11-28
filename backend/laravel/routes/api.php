@@ -20,7 +20,6 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::get('user', 'UserController@index');
     Route::match(['put', 'patch'], 'user', 'UserController@update');
-    // Route::put('user', 'UserController@update');
 
     Route::get('profiles/{user}', 'ProfileController@show');
     Route::post('profiles/{user}/follow', 'ProfileController@follow');
