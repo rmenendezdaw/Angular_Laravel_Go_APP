@@ -5,12 +5,13 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go/songs"
 	"github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go/common"
+	"github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go/songs"
+	"github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go/users"
 )
 
 func Migrate(db *gorm.DB) {
-	// users.AutoMigrate()
+	users.AutoMigrate()
 	// db.AutoMigrate(&articles.ArticleModel{})
 	db.AutoMigrate(&songs.Songs{})
 	// db.AutoMigrate(&articles.TagModel{})
@@ -32,13 +33,13 @@ func main() {
 	songs.SongsRegister(v1.Group("/songs"))
 	songs.SongsAnonymousRegister(v1.Group("/songs"))
 
-	// users.UsersRegister(v1.Group("/users"))
-	// v1.Use(users.AuthMiddleware(false))
+	users.UsersRegister(v1.Group("/users"))
+	v1.Use(users.AuthMiddleware(false))
 	// articles.ArticlesAnonymousRegister(v1.Group("/articles"))
 	// articles.TagsAnonymousRegister(v1.Group("/tags"))
-	// v1.Use(users.AuthMiddleware(true))
-	// users.UserRegister(v1.Group("/user"))
-	// users.ProfileRegister(v1.Group("/profiles"))
+	v1.Use(users.AuthMiddleware(true))
+	users.UserRegister(v1.Group("/user"))
+	users.ProfileRegister(v1.Group("/profiles"))
 	// articles.ArticlesRegister(v1.Group("/articles"))
 
 	fmt.Printf("0.0.0.0:3000")
