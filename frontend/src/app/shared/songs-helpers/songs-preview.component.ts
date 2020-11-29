@@ -9,9 +9,6 @@ import { Song } from '../../core';
 export class SongsPreviewComponent implements OnInit{
   @Input() song: Song;
   ngOnInit() {
-    this.song
-      console.log("SONG")
-      console.log(this.song);
-    
+    this.song    
   }
 }

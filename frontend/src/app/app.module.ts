@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { HomeModule } from './home/home.module';
+import { SongModule } from './song/song.module';
+import { PanelModule } from './panel/panel.module';
 import {
   FooterComponent,
   HeaderComponent,
@@ -20,7 +22,9 @@ import { CoreModule } from './core/core.module';
     SharedModule,
     HomeModule,
     AuthModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SongModule,
+    PanelModule
   ],
   providers: [],
   bootstrap: [AppComponent]

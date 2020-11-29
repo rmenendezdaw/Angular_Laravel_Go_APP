@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'song',
     loadChildren: './song/song.module#SongModule'
+  },
+  {
+    path: 'admin',
+    loadChildren: './panel/panel.module#PanelModule'
   }
 ];
 

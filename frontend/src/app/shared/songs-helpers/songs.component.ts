@@ -16,8 +16,6 @@ export class SongsComponent implements OnInit {
     this.results = [];
     this.songsService.query().subscribe(data => {
       this.results = data;
-
-      console.log(data);
     })
   }
 
