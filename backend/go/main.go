@@ -33,12 +33,12 @@ func main() {
 	songs.SongsRegister(v1.Group("/songs"))
 	songs.SongsAnonymousRegister(v1.Group("/songs"))
 
-	users.UsersRegister(v1.Group("/users"))
 	v1.Use(users.AuthMiddleware(false))
+	users.UsersRegister(v1.Group("/users"))
+	
+	v1.Use(users.AuthMiddleware(true))
 	// articles.ArticlesAnonymousRegister(v1.Group("/articles"))
 	// articles.TagsAnonymousRegister(v1.Group("/tags"))
-	v1.Use(users.AuthMiddleware(true))
-	users.UserRegister(v1.Group("/user"))
 	users.ProfileRegister(v1.Group("/profiles"))
 	// articles.ArticlesRegister(v1.Group("/articles"))
 
