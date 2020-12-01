@@ -19,7 +19,7 @@ export class SongsService {
     const params = {};
 
 
-    return this.apiService.get('/songs', 'go_be');
+    return this.apiService.get('/songs');
   }// end_query
 
   get(id): Observable<Song> {
