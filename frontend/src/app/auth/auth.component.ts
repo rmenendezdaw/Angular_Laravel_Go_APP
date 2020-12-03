@@ -49,7 +49,9 @@ export class AuthComponent implements OnInit {
     this.userService
     .attemptAuth(this.authType, credentials)
     .subscribe(
-      data => this.router.navigateByUrl('/'),
+      data => {
+        let route = (data['user'].type === 'admin') ? '/admin' : '/';
+        this.router.navigateByUrl(route)},   
       err => {
         this.errors = err;
         this.isSubmitting = false;
