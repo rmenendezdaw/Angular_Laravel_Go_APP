@@ -50,7 +50,9 @@
           <i class="ion-compose"></i>&nbsp;New Article
         </a>
       </li>
-      <li class="nav-item">
+      <li 
+      *ngIf="type == 'admin'"
+      class="nav-item">
         <a class="nav-link"
           routerLink="/admin"
           routerLinkActive="active">

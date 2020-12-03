@@ -43,6 +43,8 @@ type UserResponse struct {
 	Bio      string  `json:"bio"`
 	Image    *string `json:"image"`
 	Token    string  `json:"token"`
+	Type   	 string  `json:"type"`
+
 }
 
 func (self *UserSerializer) Response() UserResponse {
@@ -53,6 +55,7 @@ func (self *UserSerializer) Response() UserResponse {
 		Bio:      myUserModel.Bio,
 		Image:    myUserModel.Image,
 		Token:    common.GenToken(myUserModel.ID),
+		Type:	  myUserModel.Type,
 	}
 	return user
 }

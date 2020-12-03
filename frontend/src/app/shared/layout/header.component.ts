@@ -12,11 +12,15 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   currentUser: User;
+  type: String;
 
   ngOnInit() {
     this.userService.currentUser.subscribe(
       (userData) => {
+        console.log("TYPEEEEEEE")
+        console.log(userData)
         this.currentUser = userData;
+        this.type = userData.type;
       }
     );
   }
