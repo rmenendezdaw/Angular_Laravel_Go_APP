@@ -1,0 +1,52 @@
+version: "3"
+services:
+  laravel:
+    tty: true
+    image: bitnami/laravel:7
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    ports:
+      - 8003:3001
+    volumes:
+      - ./backend/laravel:/app
+    command: >
+      bash -c "php artisan route:list
+      && php artisan key:generate
+      && php artisan migrate
+      && php artisan db:seed
+      && php artisan serve --host=0.0.0.0 --port=3001"
+  mysql:
+    container_name: sql_laravel_go
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    restart: on-failure
+    volumes:
+      - mysqlBackup:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: laravel_go
+      MYSQL_DATABASE: laravel_go
+      MYSQL_USER: laravel_go
+      MYSQL_PASSWORD: laravel_go
+  angular:
+    container_name: revand_angular
+    build: ./frontend
+    ports:
+      - "4200:4200"
+    restart: on-failure
+    links:
+      - laravel
+    depends_on:
+      - laravel
+  redis:
+    image: redis:alpine
+    restart: on-failure
+    ports:
+      - "6380:6379"
+    volumes:
+      - "redis:/redis_data"
+volumes:
+  redis:
+  mysqlBackup:
