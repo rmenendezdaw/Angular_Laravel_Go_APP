@@ -9,6 +9,8 @@ import { SongsComponent, SongsPreviewComponent } from './songs-helpers';
 import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
 import { ListErrorsComponent } from './list-errors.component';
 import { ShowAuthedDirective } from './show-authed.directive';
+import { SongsAdminComponent } from './admin-helpers/songs-admin/songs-admin.component';
+import { UsersAdminComponent } from './admin-helpers/users-admin/users-admin.component';
 
 @NgModule({
   imports: [
@@ -27,7 +29,9 @@ import { ShowAuthedDirective } from './show-authed.directive';
     ListErrorsComponent,
     ShowAuthedDirective,
     SongsComponent,
-    SongsPreviewComponent
+    SongsPreviewComponent,
+    SongsAdminComponent,
+    UsersAdminComponent
 
   ],
   exports: [
@@ -44,7 +48,9 @@ import { ShowAuthedDirective } from './show-authed.directive';
     RouterModule,
     ShowAuthedDirective,
     SongsComponent,
-    SongsPreviewComponent
+    SongsPreviewComponent,
+    SongsAdminComponent,
+    UsersAdminComponent
   ]
 })
 export class SharedModule {}
