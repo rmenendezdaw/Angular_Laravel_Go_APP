@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Song, SongsService } from '../../../core';
 
 @Component({
   selector: 'app-songs-admin',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./songs-admin.component.css']
 })
 export class SongsAdminComponent implements OnInit {
+  constructor(
+    private songsService: SongsService) { }
 
-  constructor() { }
+  results: Song[];
 
   ngOnInit() {
+    this.results = [];
+    this.songsService.getAllSongsAdmin().subscribe(data => {
+      this.results = data;
+    })
   }
 
 }

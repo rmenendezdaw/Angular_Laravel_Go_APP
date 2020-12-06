@@ -29,4 +29,8 @@ export class SongsService {
   destroy(slug) {
     return this.apiService.delete('/songs/' + slug);
   }
+
+  getAllSongsAdmin(): Observable<Song[]> {
+    return this.apiService.get('/songs', 'laravel_be');
+  }// end_getAllSongsAdmin
 }

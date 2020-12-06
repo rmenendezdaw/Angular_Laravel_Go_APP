@@ -11,6 +11,7 @@ import { ListErrorsComponent } from './list-errors.component';
 import { ShowAuthedDirective } from './show-authed.directive';
 import { SongsAdminComponent } from './admin-helpers/songs-admin/songs-admin.component';
 import { UsersAdminComponent } from './admin-helpers/users-admin/users-admin.component';
+import { SongsAdminPreviewComponent } from './admin-helpers/songs-admin';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { UsersAdminComponent } from './admin-helpers/users-admin/users-admin.com
     SongsComponent,
     SongsPreviewComponent,
     SongsAdminComponent,
+    SongsAdminPreviewComponent,
     UsersAdminComponent
 
   ],
@@ -50,6 +52,7 @@ import { UsersAdminComponent } from './admin-helpers/users-admin/users-admin.com
     SongsComponent,
     SongsPreviewComponent,
     SongsAdminComponent,
+    SongsAdminPreviewComponent,
     UsersAdminComponent
   ]
 })
