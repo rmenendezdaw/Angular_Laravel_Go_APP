@@ -26,11 +26,11 @@ export class SongsService {
     return this.apiService.get('/songs/' + id)
       .pipe(map(data => data.song));
   }// end_get
-  destroy(slug) {
-    return this.apiService.delete('/songs/' + slug);
+  destroy(id) {
+    return this.apiService.delete('/songs/' + id);
   }
 
   getAllSongsAdmin(): Observable<Song[]> {
-    return this.apiService.get('/songs', 'laravel_be');
+    return this.apiService.get('/songs', 'api_url');
   }// end_getAllSongsAdmin
 }
