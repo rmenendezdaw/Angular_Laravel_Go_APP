@@ -3,50 +3,86 @@ services:
   laravel:
     tty: true
     image: bitnami/laravel:7
-    depends_on:
-      - mysql
-    links:
-      - mysql
+    container_name: laravel_container
     ports:
-      - 8003:3001
+      - 8005:3001
     volumes:
       - ./backend/laravel:/app
     command: >
-      bash -c "php artisan route:list
+      bash -c " composer install
+      && php artisan route:list
       && php artisan key:generate
       && php artisan migrate
-      && php artisan db:seed
-      && php artisan serve --host=0.0.0.0 --port=3001"
-  mysql:
-    container_name: sql_laravel_go
+      && php artisan serve --host=0.0.0.0 --port=3001 "
+    depends_on:
+      - database
+      - redis
+    networks:
+      - servidor_network
+
+  web:
+    image: golang:1.15
+    container_name: go_container
+    working_dir: /go/src/goApp
+    volumes:
+      - ./backend/go:/go/src/goApp
+    command: >
+      bash -c " rm -f go.mod || true
+      && rm -f go.sum || true
+      && go mod init goApp
+      && go mod tidy
+      && go get github.com/pilu/fresh
+      && fresh "
+    ports:
+      - "3000:3000"
+    labels:
+      traefik.backend: "web"
+      traefik.frontend.rule: "PathPrefix:/"
+    depends_on:
+      - database
+      - redis
+    networks:
+      - servidor_network
+
+  database:
     image: mysql:5.7
+    container_name: database_container
+    environment:
+      - "MYSQL_DATABASE=laravel_go"
+      - "MYSQL_ROOT_PASSWORD=laravel_go"
+      - "MYSQL_USER=laravel_go"
+      - "MYSQL_PASSWORD=laravel_go"
+    volumes:
+      - ./mySqlBackup:/var/lib/mysql
     ports:
       - "3306:3306"
-    restart: on-failure
-    volumes:
-      - mysqlBackup:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: laravel_go
-      MYSQL_DATABASE: laravel_go
-      MYSQL_USER: laravel_go
-      MYSQL_PASSWORD: laravel_go
-  angular:
-    container_name: revand_angular
-    build: ./frontend
-    ports:
-      - "4200:4200"
-    restart: on-failure
-    links:
-      - laravel
-    depends_on:
-      - laravel
+    networks:
+      - servidor_network
+
   redis:
-    image: redis:alpine
-    restart: on-failure
-    ports:
-      - "6380:6379"
+    image: redis:4.0
+    container_name: redis_container
     volumes:
-      - "redis:/redis_data"
+      - redisData:/data
+    ports:
+      - "6382:6379"
+    networks:
+      - servidor_network
+
+  traefik:
+    image: traefik:v2.0
+    container_name: traefik_container
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik/traefik.yml:/etc/traefik/traefik.yml
+    networks:
+      - servidor_network
+
+networks:
+  servidor_network:
+
 volumes:
-  redis:
-  mysqlBackup:
+  redisData:

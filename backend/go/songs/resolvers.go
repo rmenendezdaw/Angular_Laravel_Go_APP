@@ -3,7 +3,7 @@ package songs
 import (
 	"fmt"
 
-	"github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go/common"
+	"goApp/common"
 )
 
 //Create a Song

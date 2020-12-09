@@ -2,8 +2,8 @@ package articles
 
 import (
 	"errors"
-	"github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go/common"
-	"github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go/users"
+	"goApp/common"
+	"goApp/users"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"

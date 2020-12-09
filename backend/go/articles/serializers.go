@@ -2,7 +2,7 @@ package articles
 
 import (
 	"github.com/gosimple/slug"
-	"github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go/users"
+	"goApp/users"
 	"github.com/gin-gonic/gin"
 )
 

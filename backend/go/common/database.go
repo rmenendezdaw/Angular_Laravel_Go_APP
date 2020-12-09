@@ -34,7 +34,7 @@ type DBConfig struct {
 // Using this function to get a connection, you can create your connection pool here.
 func BuildDBConfig() *DBConfig {
 	dbConfig := DBConfig{
-		Host:     "localhost",
+		Host:     "database",
 		Port:     3306,
 		User:     "laravel_go",
 		Password: "laravel_go",
