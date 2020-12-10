@@ -18,5 +18,4 @@ export class SongsAdminComponent implements OnInit {
       this.results = data;
     })
   }
-
 }

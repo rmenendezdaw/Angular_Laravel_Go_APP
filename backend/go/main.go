@@ -37,6 +37,7 @@ func main() {
 	users.UsersRegister(v1.Group("/users"))
 	
 	v1.Use(users.AuthMiddleware(true))
+	users.UserRegister(v1.Group("/user"))
 	// articles.ArticlesAnonymousRegister(v1.Group("/articles"))
 	// articles.TagsAnonymousRegister(v1.Group("/tags"))
 	users.ProfileRegister(v1.Group("/profiles"))

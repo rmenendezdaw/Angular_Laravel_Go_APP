@@ -21,6 +21,10 @@ export class ApiService {
     return this.http.get(`${environment[be]}${path}`, { params })
       .pipe(catchError(this.formatErrors));
   }
+  getUser(path: string, be: string = "api_url", params: HttpParams = new HttpParams()): Observable<any> {
+    return this.http.get(`${environment[be]}${path}`, { params })
+      .pipe(catchError(this.formatErrors));
+  }
 
   put(path: string, body: Object = {}): Observable<any> {
     return this.http.put(
