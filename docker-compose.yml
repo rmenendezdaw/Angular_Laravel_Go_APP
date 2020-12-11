@@ -44,6 +44,30 @@ services:
     networks:
       - servidor_network
 
+  songs:
+    image: golang:1.15
+    container_name: go_songs_container
+    working_dir: /go/src/goSongs
+    volumes:
+      - ./backend/go/songs:/go/src/goSongs
+    ports:
+      - "3001:3001"
+    command: >
+      bash -c " rm -f go.mod || true
+      && rm -f go.sum || true
+      && go mod init goSongs
+      && go mod tidy
+      && go get github.com/pilu/fresh
+      && fresh "
+    labels:
+      traefik.backend: "songs"
+      traefik.frontend.rule: "PathPrefix:/"
+    depends_on:
+      - database
+      - redis
+    networks:
+      - servidor_network
+
   database:
     image: mysql:5.7
     container_name: database_container

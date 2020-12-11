@@ -1,8 +1,21 @@
+package data
+
+import (
+	// "time"
+	"errors"
+	"goSongs/common"
+	"goSongs/models"
+	"goSongs/controllers"
+	"net/http"
+	"github.com/gin-gonic/gin"
+)
+
+
 func SongCreate(c *gin.Context) {
-	var song Songs
+	var song models.Songs
 	c.BindJSON(&song);
 
-	err := CreateSong(&song)
+	err := controllers.CreateSong(&song)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
@@ -12,8 +25,8 @@ func SongCreate(c *gin.Context) {
 }
 
 func SongList(c *gin.Context) {
-	var song []Songs
-	err := GetAllSongs(&song)
+	var song []models.Songs
+	err := controllers.GetAllSongs(&song)
 	if err != nil {
 		c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
@@ -24,8 +37,8 @@ func SongList(c *gin.Context) {
 
 func SongById(c *gin.Context) {
 	id := c.Params.ByName("id")
-	var song Songs
-	err := GetSongByID(&song, id)
+	var song models.Songs
+	err := controllers.GetSongByID(&song, id)
 	if err != nil {
 		c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
@@ -36,14 +49,14 @@ func SongById(c *gin.Context) {
 }
 
 func SongUpdate(c *gin.Context) {
-	var song Songs
+	var song models.Songs
 	id := c.Params.ByName("id")
-	err := GetSongByID(&song, id) 
+	err := controllers.GetSongByID(&song, id) 
 	if err != nil { 
 		c.JSON(http.StatusNotFound, "NOT FOUND")
 	}else{ 
 		c.BindJSON(&song)
-		err = UpdateSong(&song) 
+		err = controllers.UpdateSong(&song) 
 		if err != nil {
 			c.JSON(http.StatusOK, "Not found")
 			c.AbortWithStatus(http.StatusNotFound)
@@ -55,9 +68,9 @@ func SongUpdate(c *gin.Context) {
 }
 
 func SongDelete(c *gin.Context) {
-	var song Songs
+	var song models.Songs
 	id := c.Params.ByName("id")
-	err := DeleteSong(&song, id)
+	err := controllers.DeleteSong(&song, id)
 	if err != nil {
 		c.JSON(http.StatusNotFound, common.NewError("songs", errors.New("Invalid slug")))
 		return
@@ -65,8 +78,8 @@ func SongDelete(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"song": "Delete success"})
 }
 func SongDeleteAll(c *gin.Context) {
-	var song Songs
-	err := DeleteAllSongs(&song)
+	var song models.Songs
+	err := controllers.DeleteAllSongs(&song)
 	if err != nil {
 		c.JSON(http.StatusOK, "Not found")
 	} else {

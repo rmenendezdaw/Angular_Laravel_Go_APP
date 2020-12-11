@@ -1,9 +1,12 @@
-package songs
+package controllers
 
 import (
-	"fmt"
 
-	"goApp/common"
+	"goSongs/common"
+	// "errors"
+	"fmt"
+	// "os"
+	// "github.com/garyburd/redigo/redis"
 )
 
 //Create a Song

@@ -6,14 +6,14 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"goApp/common"
-	"goApp/songs"
+	// "goApp/songs"
 	"goApp/users"
 )
 
 func Migrate(db *gorm.DB) {
 	users.AutoMigrate()
 	// db.AutoMigrate(&articles.ArticleModel{})
-	db.AutoMigrate(&songs.Songs{})
+	// db.AutoMigrate(&songs.Songs{})
 	// db.AutoMigrate(&articles.TagModel{})
 	// db.AutoMigrate(&articles.FavoriteModel{})
 	// db.AutoMigrate(&articles.ArticleUserModel{})
@@ -30,8 +30,8 @@ func main() {
 
 	v1 := r.Group("/api")
 
-	songs.SongsRegister(v1.Group("/songs"))
-	songs.SongsAnonymousRegister(v1.Group("/songs"))
+	// songs.SongsRegister(v1.Group("/songs"))
+	// songs.SongsAnonymousRegister(v1.Group("/songs"))
 
 	v1.Use(users.AuthMiddleware(false))
 	users.UsersRegister(v1.Group("/users"))

@@ -1,4 +1,4 @@
-package songs
+package models
 
 type Songs struct {
 	Id          uint   `json:"id"`

@@ -5,6 +5,7 @@
 .launch
 .settings/
 .project
+/songs/common/config.json
 
 #System Files
 .DS_Store
