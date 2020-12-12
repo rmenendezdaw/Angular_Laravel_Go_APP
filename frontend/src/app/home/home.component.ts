@@ -37,11 +37,11 @@ export class HomeComponent implements OnInit {
       }
     );
 
-    this.tagsService.getAll()
-    .subscribe(tags => {
-      this.tags = tags;
-      this.tagsLoaded = true;
-    });
+    // this.tagsService.getAll()
+    // .subscribe(tags => {
+    //   this.tags = tags;
+    //   this.tagsLoaded = true;
+    // });
   }
 
   setListTo(type: string = '', filters: Object = {}) {

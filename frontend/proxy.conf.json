@@ -1,6 +1,16 @@
 
 {
-    "/api/*":{
+    "/api/songs/*":{
+        "target":"http://localhost:3001",
+        "secure":false ,
+        "logLevel":"debug" 
+    },
+    "/api/users/*":{
+        "target":"http://localhost:3000",
+        "secure":false ,
+        "logLevel":"debug" 
+    },
+    "/api/user/*":{
         "target":"http://localhost:3000",
         "secure":false ,
         "logLevel":"debug" 
