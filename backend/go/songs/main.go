@@ -7,10 +7,13 @@ import (
 
 	"goSongs/common"
 	"goSongs/routers"
+	"goSongs/redis"
+
 )
 
 // Entry point for the program
 func main() {
+	client := newClient();
 	db := common.Init()
 	defer db.Close()
 
@@ -49,6 +52,4 @@ func MakeRoutes(r *gin.Engine) {
 		*/
 	}
 	r.Use(cors)
-	// r.Use(cors.Default())
-
 }

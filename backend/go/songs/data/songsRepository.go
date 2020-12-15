@@ -4,16 +4,16 @@ import (
 	// "time"
 	"errors"
 	"goSongs/common"
-	"goSongs/models"
 	"goSongs/controllers"
+	"goSongs/models"
 	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
-
 func SongCreate(c *gin.Context) {
 	var song models.Songs
-	c.BindJSON(&song);
+	c.BindJSON(&song)
 
 	err := controllers.CreateSong(&song)
 	if err != nil {
@@ -27,6 +27,7 @@ func SongCreate(c *gin.Context) {
 func SongList(c *gin.Context) {
 	var song []models.Songs
 	err := controllers.GetAllSongs(&song)
+	// redissongs.set("name", "Elliot", redissongs.newClient(), 0).Err()
 	if err != nil {
 		c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
@@ -36,6 +37,8 @@ func SongList(c *gin.Context) {
 }
 
 func SongById(c *gin.Context) {
+	// fmt.Println(redis.get("name", redis.newClient(), 0))
+
 	id := c.Params.ByName("id")
 	var song models.Songs
 	err := controllers.GetSongByID(&song, id)
@@ -51,12 +54,12 @@ func SongById(c *gin.Context) {
 func SongUpdate(c *gin.Context) {
 	var song models.Songs
 	id := c.Params.ByName("id")
-	err := controllers.GetSongByID(&song, id) 
-	if err != nil { 
+	err := controllers.GetSongByID(&song, id)
+	if err != nil {
 		c.JSON(http.StatusNotFound, "NOT FOUND")
-	}else{ 
+	} else {
 		c.BindJSON(&song)
-		err = controllers.UpdateSong(&song) 
+		err = controllers.UpdateSong(&song)
 		if err != nil {
 			c.JSON(http.StatusOK, "Not found")
 			c.AbortWithStatus(http.StatusNotFound)

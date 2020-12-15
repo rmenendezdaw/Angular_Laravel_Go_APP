@@ -89,7 +89,7 @@ services:
     volumes:
       - redisData:/data
     ports:
-      - "6382:6379"
+      - "6379:6379"
     networks:
       - servidor_network
 
