@@ -7,13 +7,11 @@ import (
 
 	"goSongs/common"
 	"goSongs/routers"
-	"goSongs/redis"
 
 )
 
 // Entry point for the program
 func main() {
-	client := newClient();
 	db := common.Init()
 	defer db.Close()
 

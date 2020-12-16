@@ -27,7 +27,10 @@ func SongCreate(c *gin.Context) {
 func SongList(c *gin.Context) {
 	var song []models.Songs
 	err := controllers.GetAllSongs(&song)
-	// redissongs.set("name", "Elliot", redissongs.newClient(), 0).Err()
+
+	client := common.NewRedisClient()
+	common.RedisSet("user", "test2", client)
+	
 	if err != nil {
 		c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
@@ -37,8 +40,6 @@ func SongList(c *gin.Context) {
 }
 
 func SongById(c *gin.Context) {
-	// fmt.Println(redis.get("name", redis.newClient(), 0))
-
 	id := c.Params.ByName("id")
 	var song models.Songs
 	err := controllers.GetSongByID(&song, id)

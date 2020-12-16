@@ -24,6 +24,7 @@ class SongController extends Controller {
     }// end_create
 
     public function index() {
+        echo Redis::get("user");
         $songs = Song::all();
 
         return response() -> json($songs);

@@ -5,7 +5,6 @@ import (
 	// "errors"
 	"fmt"
 	// "os"
-	"goSongs/redis"
 )
 
 //Create a Song
