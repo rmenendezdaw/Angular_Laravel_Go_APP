@@ -58,23 +58,16 @@ export class UserService {
 
   attemptAuth(type, credentials): Observable<User> {
     const route = (type === 'login') ? '/login' : '';
-    let userType = {data: ''}
     let user = this.apiService.post('/users' + route, {user: credentials})
-      .pipe(map(
-      data => {
-        this.setAuth(data.user);
-        console.log('?');
-        userType = data
-        return data;
-      }
-      ));
-      
-      user.subscribe((data) => {
-        console.log(data)
-        return data;
-      })
 
-      return user;
+    user.subscribe(data => {
+      if (data.user.type == 'admin') {
+        let admin = this.apiService.postLaravel('/users' + route, {user: credentials})
+        admin.subscribe((data => {console.log(data.user);this.setAuth(data.user); return data}))
+        return admin;
+      }else this.setAuth(data.user);
+    })
+    return user;
   }
 
   getCurrentUser(): User {

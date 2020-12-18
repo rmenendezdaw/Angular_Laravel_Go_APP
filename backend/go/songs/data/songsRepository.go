@@ -27,9 +27,6 @@ func SongCreate(c *gin.Context) {
 func SongList(c *gin.Context) {
 	var song []models.Songs
 	err := controllers.GetAllSongs(&song)
-
-	client := common.NewRedisClient()
-	common.RedisSet("user", "test2", client)
 	
 	if err != nil {
 		c.JSON(http.StatusOK, "Not found")

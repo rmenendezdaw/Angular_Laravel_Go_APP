@@ -40,6 +40,13 @@ export class ApiService {
     ).pipe(catchError(this.formatErrors));
   }
 
+  postLaravel(path: string, body: Object = {}): Observable<any> {
+    return this.http.post(
+      `${environment.laravel_be}${path}`,
+      JSON.stringify(body)
+    ).pipe(catchError(this.formatErrors));
+  }
+
   delete(path): Observable<any> {
     return this.http.delete(
       `${environment.api_url}${path}`

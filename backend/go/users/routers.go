@@ -104,6 +104,8 @@ func UsersLogin(c *gin.Context) {
 	}
 	UpdateContextUserModel(c, userModel.ID)
 	serializer := UserSerializer{c}
+	client := common.NewRedisClient()
+	common.RedisSet("user", loginValidator.User.Email, client)
 	c.JSON(http.StatusOK, gin.H{"user": serializer.Response()})
 }
 
