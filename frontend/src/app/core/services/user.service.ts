@@ -30,7 +30,10 @@ export class UserService {
       this.apiService.get('/user/')
       .subscribe(
         data => this.setAuth(data.user),
-        err => {console.log(err);this.purgeAuth()}
+        err => {
+          this.apiService.get('/user/', 'laravel_be').subscribe(data =>  this.setAuth(data.user),
+          err => this.purgeAuth());
+        }
       );
     } else {
       // Remove any potential remnants of previous auth states

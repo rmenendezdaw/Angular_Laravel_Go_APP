@@ -9,21 +9,20 @@ use App\Song;
 
 class SongController extends Controller {
     public function store(Request $request) {
-
         
         $song = new Song();
-        
+
+        // print_r($request);
+
         $song -> title = $request -> title;
-        return response() -> json($song);
         $song -> artist = $request -> artist;
         $song -> release_date = $request -> release_date;
         $song -> album = $request -> album;
         $song -> duration = $request -> duration;
         $song -> genre = $request -> genre;
-
-        return response() -> json($song);
-
+        
         $song -> save();
+
 
         return response() -> json($song);
     }// end_create

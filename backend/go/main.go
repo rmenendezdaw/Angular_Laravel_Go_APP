@@ -3,9 +3,11 @@ package main
 import (
 	"fmt"
 
+	"goApp/common"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"goApp/common"
+
 	// "goApp/songs"
 	"goApp/users"
 )
@@ -35,7 +37,7 @@ func main() {
 
 	v1.Use(users.AuthMiddleware(false))
 	users.UsersRegister(v1.Group("/users"))
-	
+
 	v1.Use(users.AuthMiddleware(true))
 	users.UserRegister(v1.Group("/user"))
 	// articles.ArticlesAnonymousRegister(v1.Group("/articles"))

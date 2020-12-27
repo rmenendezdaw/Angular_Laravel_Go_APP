@@ -45,7 +45,7 @@ export class ArticlesService {
 
     // Otherwise, create a new article
     } else {
-      return this.apiService.post('/articles/', {article: article})
+      return this.apiService.postLaravel('/articles/', {article: article})
         .pipe(map(data => data.article));
     }
   }

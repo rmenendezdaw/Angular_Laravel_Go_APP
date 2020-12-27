@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
-import { Article, ArticlesService } from '../core';
 import { Song, SongsService } from '../core'
 
 @Component({
@@ -18,7 +17,6 @@ export class EditorComponent implements OnInit {
   constructor(
     private songsService: SongsService,
     private route: ActivatedRoute,
-    private router: Router,
     private fb: FormBuilder
   ) {
     // use the FormBuilder to create a form group
@@ -51,6 +49,8 @@ export class EditorComponent implements OnInit {
     // update the model
     this.updateSong(this.songForm.value);
 
+
+    console.log(this.song);
     // post the changes
     this.songsService.save(this.song).subscribe(
       data => {
