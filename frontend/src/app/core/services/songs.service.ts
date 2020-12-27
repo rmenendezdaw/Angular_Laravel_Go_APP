@@ -33,4 +33,15 @@ export class SongsService {
   getAllSongsAdmin(): Observable<Song[]> {
     return this.apiService.get('/songs', 'laravel_be');
   }// end_getAllSongsAdmin
+
+  save(song): Observable<Song> {
+    if (song.id) {
+      return this.apiService.putLaravel('/songs/' + song.id, {song: song})
+        .pipe(map(data => data.song));
+
+    } else {
+      return this.apiService.postLaravel('/songs/', {song: song})
+        .pipe(map(data => data.song));
+    }
+  }
 }

@@ -33,6 +33,13 @@ export class ApiService {
     ).pipe(catchError(this.formatErrors));
   }
 
+  putLaravel(path: string, body: Object = {}): Observable<any> {
+    return this.http.put(
+      `${environment.laravel_be}${path}`,
+      JSON.stringify(body)
+    ).pipe(catchError(this.formatErrors));
+  }
+
   post(path: string, body: Object = {}): Observable<any> {
     return this.http.post(
       `${environment.api_url}${path}`,
