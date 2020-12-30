@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Api\CreateSong;
+
 use Redis;
 use App\Song;
 
@@ -12,7 +14,12 @@ class SongController extends Controller {
         
         $song = new Song();
 
+
+         
+        return response() -> json($request);
         // print_r($request);
+        // echo $request;
+        // return response() -> json($request);
 
         $song -> title = $request -> title;
         $song -> artist = $request -> artist;
@@ -22,7 +29,6 @@ class SongController extends Controller {
         $song -> genre = $request -> genre;
         
         $song -> save();
-
 
         return response() -> json($song);
     }// end_create

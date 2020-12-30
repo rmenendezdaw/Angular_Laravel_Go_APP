@@ -49,8 +49,6 @@ class ArticleController extends ApiController
     {
         $user = auth()->user();
 
-        return response() -> json($request);
-
         $article = $user->articles()->create([
             'title' => $request->input('article.title'),
             'description' => $request->input('article.description'),

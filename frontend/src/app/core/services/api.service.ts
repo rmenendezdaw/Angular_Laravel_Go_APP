@@ -50,7 +50,7 @@ export class ApiService {
   postLaravel(path: string, body: Object = {}): Observable<any> {
     return this.http.post(
       `${environment.laravel_be}${path}`,
-      JSON.stringify(body)
+      body
     ).pipe(catchError(this.formatErrors));
   }
 

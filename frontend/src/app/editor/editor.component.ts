@@ -50,7 +50,6 @@ export class EditorComponent implements OnInit {
     this.updateSong(this.songForm.value);
 
 
-    console.log(this.song);
     // post the changes
     this.songsService.save(this.song).subscribe(
       data => {
