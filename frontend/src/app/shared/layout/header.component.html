@@ -43,7 +43,9 @@
         </a>
       </li>
 
-      <li class="nav-item">
+      <li class="nav-item"
+      *ngIf="type == 'admin'"
+      >
         <a class="nav-link"
           routerLink="/editor"
           routerLinkActive="active">

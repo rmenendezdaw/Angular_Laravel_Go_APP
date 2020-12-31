@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Song, SongsService } from '../core'
 
@@ -17,7 +17,8 @@ export class EditorComponent implements OnInit {
   constructor(
     private songsService: SongsService,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
   ) {
     // use the FormBuilder to create a form group
     this.songForm = this.fb.group({
@@ -54,6 +55,7 @@ export class EditorComponent implements OnInit {
     this.songsService.save(this.song).subscribe(
       data => {
         console.log(data);
+        this.router.navigateByUrl('/admin')
       }, 
       err => {
         this.errors = err;

@@ -13,24 +13,18 @@ class SongController extends Controller {
     public function store(Request $request) {
         
         $song = new Song();
-
-
-         
-        return response() -> json($request);
-        // print_r($request);
-        // echo $request;
-        // return response() -> json($request);
-
-        $song -> title = $request -> title;
-        $song -> artist = $request -> artist;
-        $song -> release_date = $request -> release_date;
-        $song -> album = $request -> album;
-        $song -> duration = $request -> duration;
-        $song -> genre = $request -> genre;
+        
+        $song -> title = $request['song']['title'];
+        $song -> artist = $request['song']['artist'];
+        $song -> release_date = $request['song']['release_date'];
+        $song -> album = $request['song']['album'];
+        $song -> duration = $request['song']['duration'];
+        $song -> genre = $request['song']['genre'];
         
         $song -> save();
 
         return response() -> json($song);
+
     }// end_create
 
     public function index() {

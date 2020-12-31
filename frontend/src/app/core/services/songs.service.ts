@@ -37,11 +37,11 @@ export class SongsService {
   save(song): Observable<Song> {
     if (song.id) {
       return this.apiService.putLaravel('/songs/' + song.id, {song: song})
-        .pipe(map(data => data.song));
+        .pipe(map(data => data));
 
     } else {
       return this.apiService.postLaravel('/songs/', {song: song})
-        .pipe(map(data => data.song));
+        .pipe(map(data => data));
     }
   }
 }
