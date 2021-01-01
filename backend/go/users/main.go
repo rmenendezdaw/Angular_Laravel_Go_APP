@@ -4,6 +4,8 @@ import (
 	"fmt"
 
 	"goUsers/common"
+	"goUsers/data"
+	"goUsers/models"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"

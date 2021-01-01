@@ -3,7 +3,6 @@ package models
 import (
 	"errors"
 	"goUsers/common"
-
 	"github.com/jinzhu/gorm"
 	"golang.org/x/crypto/bcrypt"
 )
