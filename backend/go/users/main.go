@@ -7,7 +7,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	// "goApp/songs"
 )
 
 func Migrate(db *gorm.DB) {

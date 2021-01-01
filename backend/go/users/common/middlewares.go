@@ -1,7 +1,6 @@
-package users
+package common
 
 import (
-	"goUsers/common"
 	"net/http"
 	"strings"
 

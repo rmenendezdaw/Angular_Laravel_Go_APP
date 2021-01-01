@@ -1,10 +1,11 @@
-package users
+package routes
 
 import (
 	"errors"
-	"goApp/common"
-	"github.com/gin-gonic/gin"
+	"goUsers/common"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func UsersRegister(router *gin.RouterGroup) {

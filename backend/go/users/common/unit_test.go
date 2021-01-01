@@ -1,18 +1,20 @@
-package users
+package common
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 
 	"bytes"
 	"fmt"
-	"github.com/jinzhu/gorm"
-	"goApp/common"
-	"github.com/gin-gonic/gin"
+	"goUsers/common"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	_ "regexp"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/gorm"
 )
 
 var image_url = "https://golang.org/doc/gopher/frontpage.png"

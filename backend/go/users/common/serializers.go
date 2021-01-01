@@ -1,9 +1,7 @@
-package users
+package common
 
 import (
 	"github.com/gin-gonic/gin"
-
-	"goUsers/common"
 )
 
 type ProfileSerializer struct {
