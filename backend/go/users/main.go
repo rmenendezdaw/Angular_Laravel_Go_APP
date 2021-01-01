@@ -4,8 +4,7 @@ import (
 	"fmt"
 
 	"goUsers/common"
-	"goUsers/data"
-	"goUsers/models"
+	"goUsers/routers"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -26,12 +25,12 @@ func main() {
 
 	v1 := r.Group("/api")
 
-	v1.Use(users.AuthMiddleware(false))
-	users.UsersRegister(v1.Group("/users"))
+	v1.Use(data.AuthMiddleware(false))
+	routers.UsersRegister(v1.Group("/users"))
 
-	v1.Use(users.AuthMiddleware(true))
-	users.UserRegister(v1.Group("/user"))
-	users.ProfileRegister(v1.Group("/profiles"))
+	v1.Use(data.AuthMiddleware(true))
+	router.UserRegister(v1.Group("/user"))
+	router.ProfileRegister(v1.Group("/profiles"))
 
 	fmt.Printf("0.0.0.0:3000")
 	r.Run(":3000")

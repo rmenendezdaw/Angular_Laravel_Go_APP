@@ -59,6 +59,7 @@ services:
       && go mod init goUsers
       && go mod tidy
       && go get github.com/pilu/fresh
+      && go get github.com/jinzhu/gorm
       && fresh "
     labels:
       traefik.backend: "users"
