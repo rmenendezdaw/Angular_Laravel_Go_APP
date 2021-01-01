@@ -11,7 +11,7 @@ services:
     command: >
       bash -c " composer install
       && php artisan route:list
-      && php artisan migrate
+      && php artisan migrate --no-interaction
       && php artisan key:generate
       && php artisan jwt:secret --no-interaction
       && php artisan serve --host=0.0.0.0 --port=8005 "
@@ -21,23 +21,47 @@ services:
     networks:
       - servidor_network
 
-  web:
+  # web:
+  #   image: golang:1.15
+  #   container_name: go_container
+  #   working_dir: /go/src/goApp
+  #   volumes:
+  #     - ./backend/go:/go/src/goApp
+  #   command: >
+  #     bash -c " rm -f go.mod || true
+  #     && rm -f go.sum || true
+  #     && go mod init goApp
+  #     && go mod tidy
+  #     && go get github.com/pilu/fresh
+  #     && fresh "
+  #   ports:
+  #     - "3000:3000"
+  #   labels:
+  #     traefik.backend: "web"
+  #     traefik.frontend.rule: "PathPrefix:/"
+  #   depends_on:
+  #     - database
+  #     - redis
+  #   networks:
+  #     - servidor_network
+
+  users:
     image: golang:1.15
-    container_name: go_container
-    working_dir: /go/src/goApp
+    container_name: go_users_container
+    working_dir: /go/src/goUsers
     volumes:
-      - ./backend/go:/go/src/goApp
+      - ./backend/go/users:/go/src/goUsers
+    ports:
+      - "3000:3000"
     command: >
       bash -c " rm -f go.mod || true
       && rm -f go.sum || true
-      && go mod init goApp
+      && go mod init goUsers
       && go mod tidy
       && go get github.com/pilu/fresh
       && fresh "
-    ports:
-      - "3000:3000"
     labels:
-      traefik.backend: "web"
+      traefik.backend: "users"
       traefik.frontend.rule: "PathPrefix:/"
     depends_on:
       - database

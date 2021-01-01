@@ -1,12 +1,13 @@
 package users
 
 import (
-	"github.com/dgrijalva/jwt-go"
-	"github.com/dgrijalva/jwt-go/request"
-	"goApp/common"
-	"github.com/gin-gonic/gin"
+	"goUsers/common"
 	"net/http"
 	"strings"
+
+	"github.com/dgrijalva/jwt-go"
+	"github.com/dgrijalva/jwt-go/request"
+	"github.com/gin-gonic/gin"
 )
 
 // Strips 'TOKEN ' prefix from token string

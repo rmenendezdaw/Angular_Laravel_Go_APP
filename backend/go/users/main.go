@@ -2,17 +2,22 @@ package main
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
-	// "github.com/jinzhu/gorm"
 
 	"goUsers/common"
-	"goUsers/routers"
 
+	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/gorm"
+	// "goApp/songs"
 )
 
-// Entry point for the program
+func Migrate(db *gorm.DB) {
+	users.AutoMigrate()
+
+}
+
 func main() {
 	db := common.Init()
+	Migrate(db)
 	defer db.Close()
 
 	r := gin.Default()
@@ -25,6 +30,7 @@ func main() {
 
 	v1.Use(users.AuthMiddleware(true))
 	users.UserRegister(v1.Group("/user"))
+	users.ProfileRegister(v1.Group("/profiles"))
 
 	fmt.Printf("0.0.0.0:3000")
 	r.Run(":3000")
@@ -44,13 +50,7 @@ func MakeRoutes(r *gin.Engine) {
 			c.AbortWithStatus(200)
 		}
 		c.Next()
-
-		/*
-			fmt.Printf("c.Request.Method \n")
-			fmt.Printf(c.Request.Method)
-			fmt.Printf("c.Request.RequestURI \n")
-			fmt.Printf(c.Request.RequestURI)
-		*/
 	}
 	r.Use(cors)
+
 }
