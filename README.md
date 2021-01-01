@@ -51,3 +51,14 @@ goApp/users
 ### Creación de microservicios en GO
 
 Para realizar la refactorización en GO para que pase a utilizar microservicios empezaremos creando la estructura de directorios.
+Dentro de GO creamos el directorio songs, y dentro de este creamos los directorios:
+
+| Directorio | Descripción |
+| ------------- | ------------- |
+| common | Aqui dentro se localizaran los ficheros compartidos asi como utilidades. |
+| controllers | Incluirá los controladores necesarios para llevar a cabo las distintas acciones de los endpoints.| 
+| data | Incluirá las funciones necesarias para obtener la información solicitada. |
+| models | Incluirá los modelos utilizados por el microservicio. |
+| routers | Aquí estarán la definición de rutas y endpoints. |
+
+Una vez tengamos la arquitectura de directorios habrá que ir añadiendo los archivos y modificar los packages e imports.
