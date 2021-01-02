@@ -6,11 +6,11 @@ import (
 	"goUsers/common"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"goUsers/models"
+	"goUsers/src"
 )
 
 func Migrate(db *gorm.DB) {
-	models.AutoMigrate()
+	src.AutoMigrate()
 
 }
 
@@ -24,12 +24,12 @@ func main() {
 
 	v1 := r.Group("/api")
 
-	v1.Use(models.AuthMiddleware(false))
-	models.UsersRegister(v1.Group("/users"))
+	v1.Use(src.AuthMiddleware(false))
+	src.UsersRegister(v1.Group("/users"))
 
-	v1.Use(models.AuthMiddleware(true))
-	models.UserRegister(v1.Group("/user"))
-	models.ProfileRegister(v1.Group("/profiles"))
+	v1.Use(src.AuthMiddleware(true))
+	src.UserRegister(v1.Group("/user"))
+	src.ProfileRegister(v1.Group("/profiles"))
 
 	fmt.Printf("0.0.0.0:3000")
 	r.Run(":3000")

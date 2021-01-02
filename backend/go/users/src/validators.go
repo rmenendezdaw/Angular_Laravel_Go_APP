@@ -1,4 +1,4 @@
-package models
+package src
 
 import (
 	"goUsers/common"
