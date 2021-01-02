@@ -79,11 +79,11 @@ Una vez tengamos la arquitectura de directorios habrá que ir añadiendo los arc
 
  La estructura de directorios tendrá la siguiente forma:
 
- **Imágen estructura*
+![estructura-songs](images/estructura_songs.png)
 
  También tenemos que configurar el microservicio en el fichero docker-compose:
 
-  **Imágen docker-songs*
+![docker-songs](images/docker-songs.png)
 
 Dónde:
  - Partiremos de una imágen de Go llamada "golang v1.15".
@@ -98,11 +98,11 @@ Dónde:
 
  La estructura de directorios tendrá la siguiente forma:
 
- **Imágen estructura*
+![estructura-users](images/estructura-users.png)
 
  También tenemos que configurar el microservicio en el fichero docker-compose:
 
-  **Imágen docker-users*
+![docker-users](images/docker-users.png)
 
 Dónde:
  - Partiremos de la imágen de Go "golang v1.15".
@@ -114,20 +114,63 @@ Dónde:
  - Trabajará en la red común "servidor_network".
 
 
-### Méctricas entre Traefik y Prometheus
+### Méctricas entre Traefik, Prometheus y Grafana
 
+#### Traefik
 Empezamos por el archivo "traefik.ylm" en el cual configuraremos los entrypoints:
 
 ![traefik.yml](images/captura3.png)
 
 Seguimos con el docker-compose:
-Dónde:
-- Partirá de una imágen de traefik
 
 ![traefik-compose](images/captura7.png)
+
+Dónde:
+- Partirá de una imágen de traefik v2.3.
+- El nombre del contenedor será "traefik_container".
+- Utilizará los puertos 80:80 y 8080:8080.
+- Tendrá dos volumenes.
+- Trabajará en la red común.
 
 
 En los microservicios que queramos utilizar Traefik debemos utilizar labels:
 
 ![traefik-compose](images/docker-songs.png)
+
+#### Prometheus
+
+Cada servicio tiene su propio archivo de configuración:
+
+![prometheus.yml](images/captura2.png)
+
+Y tiene que estar configurado en el archivo docker-compose:
+
+![prometheus-docker](images/captura2.png)
+
+Dónde:
+- Partirá de una imágen de prometheus v2.20.1.
+- El nombre del contenedor será "prometheus_container".
+- Tendrá un volumen.
+- Expondrá el puerto 9090 del host y el puerto 9090 del contenedor.
+- Dependerá del servicio de Traefik.
+- Compartirá la red común.
+
+#### Grafana 
+
+Debemos integrar el archivo de configuración de grafana:
+
+![grafana.yml](images/captura1.png)
+
+También debemos de configurara el servicio en el docker-compose:
+
+![grafana-docker](images/captura2.png)
+
+Dónde:
+- Dependerá del servicio Prometheus.
+- Expondrá los puertos "3500:3000".
+- El nombre del contenedor será "grafana_container".
+- Partirá de la imágen de grafana v7.1.5.
+- Tendrá variables de entorno que necesita grafana para poder funcionar.
+- Trabajará en la red común.
+- Dispondrá de dos volúmenes. 
 
