@@ -28,6 +28,18 @@ Laravel pone énfasis en la calidad del código, la facilidad de mantenimiento y
 
 Este trabaja con una arquitectura de carpetas avanzada, de modo que promueve la separación de los archivos con un orden correcto y definido, que guiará a todos los integrantes del equipo de trabajo y será un estándar a lo largo de los distintos proyectos. Por supuesto, dispone también de una arquitectura de clases también muy adecuada, que promueve la separación del código por responsabilidades. Su estilo arquitectónico es MVC.
 
+### Traefik
+
+Traefik es un equilibrador de carga y proxy inverso HTTP moderno que facilita la implementación de microservicios. 
+Traefik se integra con los componentes de su infraestructura existente (Docker, Swarm mode, Kubernetes, Marathon, Consul, Etcd, Rancher, Amazon ECS, ...) y se configura automáticamente y dinámicamente. 
+Traefik es un Edge Router de código abierto que hace que la publicación de sus servicios sea una experiencia divertida y fácil.
+Recibe solicitudes en nombre de su sistema y descubre qué componentes son responsables de manejarlas.
+
+Traefik es compatible de forma nativa con todas las principales tecnologías de clúster, como Kubernetes, Docker, Docker Swarm, AWS, Mesos, Marathon, etc. 
+Puede manejar muchos al mismo tiempo.
+
+Para poder utilizarlo tendremos que configurar varios archivos.
+
 ### Refactorización de GO
 
 Lo primero que tuvimos que hacer fue modificar el archivo docker-compose.
@@ -63,7 +75,7 @@ Dentro de GO creamos el directorio songs, y dentro de este creamos los directori
 
 Una vez tengamos la arquitectura de directorios habrá que ir añadiendo los archivos y modificar los packages e imports.
 
- #### Microservicio Songs
+#### Microservicio Songs
 
  La estructura de directorios tendrá la siguiente forma:
 
@@ -101,4 +113,21 @@ Dónde:
  - Dependerá de los servicios de MYSQL y de Redis.
  - Trabajará en la red común "servidor_network".
 
+
+### Méctricas entre Traefik y Prometheus
+
+Empezamos por el archivo "traefik.ylm" en el cual configuraremos los entrypoints:
+
+![traefik.yml](images/captura3.png)
+
+Seguimos con el docker-compose:
+Dónde:
+- Partirá de una imágen de traefik
+
+![traefik-compose](images/captura7.png)
+
+
+En los microservicios que queramos utilizar Traefik debemos utilizar labels:
+
+![traefik-compose](images/docker-songs.png)
 
