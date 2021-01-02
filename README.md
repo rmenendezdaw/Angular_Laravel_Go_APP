@@ -44,7 +44,7 @@ Para poder utilizarlo tendremos que configurar varios archivos.
 
 Lo primero que tuvimos que hacer fue modificar el archivo docker-compose.
 
-Establecimos el direcotrio de trabajo a "/go/src/goApp"
+Establecemos el directorio de trabajo a "/go/src/goApp"
 Asignamos el volumen a "./backend/go:/go/src/goApp"
 
 La nueva parte de Go quedaria de la siguiente forma:
