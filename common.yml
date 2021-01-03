@@ -3,6 +3,8 @@ version: "2"
 services:
   go_service:
     image: golang:1.15
+    labels:
+      traefik.frontend.rule: "PathPrefix:/"
     networks:
       - servidor_network
   # container_name: go_users_container

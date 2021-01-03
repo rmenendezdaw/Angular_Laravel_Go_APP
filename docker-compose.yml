@@ -65,13 +65,14 @@ services:
       && fresh "
     labels:
       traefik.backend: "users"
-      traefik.frontend.rule: "PathPrefix:/"
     depends_on:
       - database
       - redis
 
   songs:
-    image: golang:1.15
+    extends: 
+      file: common.yml
+      service: go_service
     container_name: go_songs_container
     working_dir: /go/src/goSongs
     volumes:
@@ -87,12 +88,9 @@ services:
       && fresh "
     labels:
       traefik.backend: "songs"
-      traefik.frontend.rule: "PathPrefix:/"
     depends_on:
       - database
       - redis
-    networks:
-      - servidor_network
 
   database:
     image: mysql:5.7
@@ -130,6 +128,7 @@ services:
       - ./traefik/traefik.yml:/etc/traefik/traefik.yml
     networks:
       - servidor_network
+
   prometheus:
     image: prom/prometheus:v2.20.1
     container_name: prometheus_container
@@ -144,6 +143,7 @@ services:
     networks:
       - servidor_network
     command: --config.file=/etc/prometheus/prometheus.yml
+    
   grafana:
       depends_on:
           - prometheus
