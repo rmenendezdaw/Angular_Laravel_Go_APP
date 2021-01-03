@@ -1,0 +1,24 @@
+version: "2"
+
+services:
+  go_service:
+    image: golang:1.15
+    networks:
+      - servidor_network
+  # container_name: go_users_container
+  # working_dir: /go/src/goUsers
+  # volumes:
+  #   - ./backend/go/users:/go/src/goUsers
+  # ports:
+  #   - "3000:3000"
+  # command: >
+  #   bash -c " rm -f go.mod || true
+  #   && rm -f go.sum || true
+  #   && go mod init goUsers
+  #   && go mod tidy
+  #   && go get github.com/pilu/fresh
+  #   && go get github.com/jinzhu/gorm
+  #   && fresh "
+  # labels:
+  #   traefik.backend: "users"
+  #   traefik.frontend.rule: "PathPrefix:/"

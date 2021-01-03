@@ -1,4 +1,4 @@
-version: "3"
+version: "2"
 services:
   laravel:
     tty: true
@@ -46,7 +46,9 @@ services:
   #     - servidor_network
 
   users:
-    image: golang:1.15
+    extends: 
+      file: common.yml
+      service: go_service
     container_name: go_users_container
     working_dir: /go/src/goUsers
     volumes:
@@ -67,8 +69,6 @@ services:
     depends_on:
       - database
       - redis
-    networks:
-      - servidor_network
 
   songs:
     image: golang:1.15
