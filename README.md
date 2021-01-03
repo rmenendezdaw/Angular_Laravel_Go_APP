@@ -145,7 +145,7 @@ Cada servicio tiene su propio archivo de configuración:
 
 Y tiene que estar configurado en el archivo docker-compose:
 
-![prometheus-docker](images/captura2.png)
+![prometheus-docker](images/prometheus-docker.png)
 
 Dónde:
 - Partirá de una imágen de prometheus v2.20.1.
@@ -155,6 +155,10 @@ Dónde:
 - Dependerá del servicio de Traefik.
 - Compartirá la red común.
 
+Si vamos al navegador y escribimos "http://localhost:9090" nos aparecerá lo siguiente:
+![prometheus-working](images/prometheuswork.png)
+
+
 #### Grafana 
 
 Debemos integrar el archivo de configuración de grafana:
@@ -163,7 +167,7 @@ Debemos integrar el archivo de configuración de grafana:
 
 También debemos de configurara el servicio en el docker-compose:
 
-![grafana-docker](images/captura2.png)
+![grafana-docker](images/grafana-docker.png)
 
 Dónde:
 - Dependerá del servicio Prometheus.
@@ -174,3 +178,17 @@ Dónde:
 - Trabajará en la red común.
 - Dispondrá de dos volúmenes. 
 
+Ahora vamos al navegador y ponemos la ruta "http://localhost:3500":
+
+![grafana-working](images/grafanawork.png)
+
+Para poder visualizar las métricas de Prometheus tendremos que ir a la configuración de Grafana y añadir:
+![grafana-config](images/captura4.png)
+
+Una vez añadido vamos a crear el Dashboard:
+
+![grafana-config](images/captura5.png)
+
+Le pondremos las métricas de traefic para las request de los microservicios:
+
+![grafana-config](images/captura6.png)
