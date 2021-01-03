@@ -113,6 +113,23 @@ Dónde:
  - Dependerá de los servicios de MYSQL y de Redis.
  - Trabajará en la red común "servidor_network".
 
+### Creación del servicio base
+
+Lo primero será asegurarse que la versión de docker-compose que utilizamos es la 2, ya que en la 3 no se permite usar la instruccion extends.
+
+Luego crearemos un archivo llamado common.yml, donde crearemos el servicio base para los microservicios.
+En este se definirán unos valores base que compartiran todos los servicios que lo utilicen.
+Aqui un ejemplo.
+
+captura common.yml
+![common.yml](images/captura10.png)
+
+Para que los servicios usen el microservicio base habrá que poner la opción extends, seguida del archivo donde se encuentra el servicio y el nombre
+del servicios que vamos a utilizar.
+
+captura ejemplo
+![ejemplo docker](images/captura11.png)
+
 
 ### Méctricas entre Traefik, Prometheus y Grafana
 
@@ -131,7 +148,6 @@ Dónde:
 - Utilizará los puertos 80:80 y 8080:8080.
 - Tendrá dos volumenes.
 - Trabajará en la red común.
-
 
 En los microservicios que queramos utilizar Traefik debemos utilizar labels:
 
@@ -157,7 +173,6 @@ Dónde:
 
 Si vamos al navegador y escribimos "http://localhost:9090" nos aparecerá lo siguiente:
 ![prometheus-working](images/prometheuswork.png)
-
 
 #### Grafana 
 
