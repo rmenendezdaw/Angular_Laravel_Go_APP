@@ -41,6 +41,19 @@ export class UserService {
     }
   }
 
+  getUser() {
+    return this.apiService.get('/user/');
+
+    // user.subscribe(
+    //     data => {console.log(data)},
+    //     err => {
+    //       // this.apiService.get('/user/', 'laravel_be').subscribe(data =>  console.log(data),
+    //       // err => this.purgeAuth());
+    //     }
+    //   );
+    // return user;
+  }
+
   setAuth(user: User) {
     // Save JWT sent from server in localstorage
     this.jwtService.saveToken(user.token);

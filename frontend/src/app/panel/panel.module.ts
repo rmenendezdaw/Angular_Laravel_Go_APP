@@ -4,6 +4,7 @@ import { SharedModule } from '../shared';
 import { CommonModule } from '@angular/common';
 import { PanelComponent } from './panel.component';
 import { PanelRoutingModule } from './panel-routing.module';
+import { PanelResolver } from './panel-resolver.service';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { PanelRoutingModule } from './panel-routing.module';
   ],
   declarations: [
     PanelComponent
-  ]
+  ],
+  providers: [PanelResolver]
 })
 export class PanelModule { }
