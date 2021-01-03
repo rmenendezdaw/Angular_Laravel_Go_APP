@@ -36,7 +36,9 @@ class SongController extends Controller {
     public function show($id) {
         $song = Song::find($id);
 
-        return response() -> json($song);
+        $response = ["song" => $song];
+
+        return response() -> json($response);
     }// end_showSong
 
     public function update(Request $request, $id) {
@@ -44,12 +46,12 @@ class SongController extends Controller {
 
         if (!$song) return response() -> json('Not Found');
 
-        $song -> title = $request -> title;
-        $song -> artist = $request -> artist;
-        $song -> release_date = $request -> release_date;
-        $song -> album = $request -> album;
-        $song -> duration = $request -> duration;
-        $song -> genre = $request -> genre;
+        $song -> title = $request['song']['title'];
+        $song -> artist = $request['song']['artist'];
+        $song -> release_date = $request['song']['release_date'];
+        $song -> album = $request['song']['album'];
+        $song -> duration = $request['song']['duration'];
+        $song -> genre = $request['song']['genre'];
 
         $song -> save();
 

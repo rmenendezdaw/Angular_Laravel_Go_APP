@@ -30,6 +30,11 @@ export class SongsService {
     return this.apiService.delete('/songs/' + id);
   }
 
+  getLaravel(id): Observable<Song> {
+    return this.apiService.get('/songs/' + id, 'laravel_be')
+      .pipe(map(data => data.song));
+  }// end_get
+
   getAllSongsAdmin(): Observable<Song[]> {
     return this.apiService.get('/songs', 'laravel_be');
   }// end_getAllSongsAdmin
