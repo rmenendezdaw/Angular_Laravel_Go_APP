@@ -57,11 +57,11 @@ Pasará de:
 
 `github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go/users`
 
-A
+a
 
 `goApp/users`
 
-Ahora pasaremos a crear los microservicios
+Ahora pasaremos a crear los microservicios.
 
 ### Creación de microservicios en GO
 
