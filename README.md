@@ -44,21 +44,24 @@ Para poder utilizarlo tendremos que configurar varios archivos.
 
 Lo primero que tuvimos que hacer fue modificar el archivo docker-compose.
 
-Establecemos el directorio de trabajo a "/go/src/goApp"
-Asignamos el volumen a "./backend/go:/go/src/goApp"
+Establecemos el directorio de trabajo a `/go/src/goApp`
+Asignamos el volumen a `./backend/go:/go/src/goApp`
 
 La nueva parte de Go quedaria de la siguiente forma:
 
-Imagen Docker-compose
+![compose-web](images/compose-web.png)
+
 
 Una vez tengamos los cambios realizados, actualizaremos todos los imports en Go con la nueva ruta. 
 Pasará de:
 
-github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go/users
+`github.com/rmenendezdaw/Angular_Laravel_Go_APP/backend/go/users`
 
 A
 
-goApp/users
+`goApp/users`
+
+Ahora pasaremos a crear los microservicios
 
 ### Creación de microservicios en GO
 
@@ -86,13 +89,13 @@ Una vez tengamos la arquitectura de directorios habrá que ir añadiendo los arc
 ![docker-songs](images/docker-songs.png)
 
 Dónde:
- - Partiremos de una imágen de Go llamada "golang v1.15".
- - El nombre del contenedor será go_songs_container.
- - Su directorio de trabajo será /go/src/goSongs.
- - Utilizará el puerto 3001.
+ - Partiremos de una imágen de Go llamada *golang v1.15*.
+ - El nombre del contenedor será *go_songs_container*.
+ - Su directorio de trabajo será */go/src/goSongs*.
+ - Utilizará el puerto *3001*.
  - Dispondrá de los comandos para iniciar Go.
- - Dependerá de los servicios de MYSQL y de Redis.
- - Trabajará en la red común "servidor_network".
+ - Dependerá de los servicios de **MYSQL** y de **Redis**.
+ - Trabajará en la red común *servidor_network*.
 
 #### Microservicio users
 
@@ -100,94 +103,100 @@ Dónde:
 
 ![estructura-users](images/estructura-users.png)
 
- También tenemos que configurar el microservicio en el fichero docker-compose:
+ También tenemos que configurar el microservicio en el fichero *docker-compose*:
 
 ![docker-users](images/docker-users.png)
 
 Dónde:
- - Partiremos de la imágen de Go "golang v1.15".
- - El nombre del contenedor será go_users_container.
- - Su directorio de trabajo será /go/src/goUsers.
- - Utilizará el puerto 3000.
- - Dispondrá de los comandos para iniciar Go.
- - Dependerá de los servicios de MYSQL y de Redis.
- - Trabajará en la red común "servidor_network".
+ - Partiremos de la imágen de Go *golang v1.15*.
+ - El nombre del contenedor será *go_users_container*.
+ - Su directorio de trabajo será */go/src/goUsers*.
+ - Utilizará el puerto **3000**.
+ - Dispondrá de los comandos para iniciar **Go**.
+ - Dependerá de los servicios de **MYSQL** y de **Redis**.
+ - Trabajará en la red común *servidor_network*.
 
 ### Creación del servicio base
 
-Lo primero será asegurarse que la versión de docker-compose que utilizamos es la 2, ya que en la 3 no se permite usar la instruccion extends.
+Lo primero será asegurarse que la versión de docker-compose que utilizamos es la *2*, ya que en la *3* no se permite usar la instrucción *extends*.
 
-Luego crearemos un archivo llamado common.yml, donde crearemos el servicio base para los microservicios.
-En este se definirán unos valores base que compartiran todos los servicios que lo utilicen.
-Aqui un ejemplo.
+Luego crearemos un archivo llamado **common.yml**, donde crearemos el servicio base para los microservicios.
+En este se definirán unos valores base que compartirán todos los servicios que lo utilicen.
 
-captura common.yml
+Aquí un ejemplo:
+
 ![common.yml](images/captura10.png)
 
-Para que los servicios usen el microservicio base habrá que poner la opción extends, seguida del archivo donde se encuentra el servicio y el nombre
+Para que los servicios usen el microservicio base habrá que poner la opción *extends*, seguida del archivo donde se encuentra el servicio y el nombre
 del servicios que vamos a utilizar.
 
-captura ejemplo
 ![ejemplo docker](images/captura11.png)
 
 
 ### Méctricas entre Traefik, Prometheus y Grafana
 
 #### Traefik
-Empezamos por el archivo "traefik.ylm" en el cual configuraremos los entrypoints:
+Empezamos por el archivo **traefik.yml** en el cual configuraremos los entrypoints.
+
+En el archivo de configuración asignaremos el puerto de las métricas al **8082**.
 
 ![traefik.yml](images/captura3.png)
 
-Seguimos con el docker-compose:
+Seguimos con el *docker-compose*:
 
 ![traefik-compose](images/captura7.png)
 
 Dónde:
 - Partirá de una imágen de traefik v2.3.
-- El nombre del contenedor será "traefik_container".
-- Utilizará los puertos 80:80 y 8080:8080.
+- El nombre del contenedor será *traefik_container*.
+- Utilizará los puertos **80:80** y **8080:8080**.
 - Tendrá dos volumenes.
 - Trabajará en la red común.
 
-En los microservicios que queramos utilizar Traefik debemos utilizar labels:
+En los microservicios que queramos utilizar Traefik debemos utilizar *labels*:
 
 ![traefik-compose](images/docker-songs.png)
 
 #### Prometheus
 
-Cada servicio tiene su propio archivo de configuración:
+Cada servicio tiene su propio archivo de configuración.
+
+En nuestro caso en la opción targes pondremos el nombre del contenedor y el puerto expuesto que es el **8082**.
 
 ![prometheus.yml](images/captura2.png)
 
-Y tiene que estar configurado en el archivo docker-compose:
+Y tiene que estar configurado en el archivo *docker-compose*:
 
 ![prometheus-docker](images/prometheus-docker.png)
 
 Dónde:
 - Partirá de una imágen de prometheus v2.20.1.
-- El nombre del contenedor será "prometheus_container".
+- El nombre del contenedor será *prometheus_container*.
 - Tendrá un volumen.
-- Expondrá el puerto 9090 del host y el puerto 9090 del contenedor.
+- Expondrá el puerto **9090** del host y el puerto **9090** del contenedor.
 - Dependerá del servicio de Traefik.
 - Compartirá la red común.
 
-Si vamos al navegador y escribimos "http://localhost:9090" nos aparecerá lo siguiente:
+Si vamos al navegador y escribimos **http://localhost:9090** nos aparecerá lo siguiente:
+
 ![prometheus-working](images/prometheuswork.png)
 
 #### Grafana 
 
-Debemos integrar el archivo de configuración de grafana:
+Debemos integrar el archivo de configuración de Grafana:
 
 ![grafana.yml](images/captura1.png)
 
-También debemos de configurara el servicio en el docker-compose:
+Configuraremos para que la dirección sea el nombre del contenedor y el puerto **9090**.
+
+También debemos de configurara el servicio en el *docker-compose*:
 
 ![grafana-docker](images/grafana-docker.png)
 
 Dónde:
 - Dependerá del servicio Prometheus.
-- Expondrá los puertos "3500:3000".
-- El nombre del contenedor será "grafana_container".
+- Expondrá los puertos **3500:3000**.
+- El nombre del contenedor será *grafana_container*.
 - Partirá de la imágen de grafana v7.1.5.
 - Tendrá variables de entorno que necesita grafana para poder funcionar.
 - Trabajará en la red común.
@@ -198,12 +207,13 @@ Ahora vamos al navegador y ponemos la ruta "http://localhost:3500":
 ![grafana-working](images/grafanawork.png)
 
 Para poder visualizar las métricas de Prometheus tendremos que ir a la configuración de Grafana y añadir:
+
 ![grafana-config](images/captura4.png)
 
 Una vez añadido vamos a crear el Dashboard:
 
 ![grafana-config](images/captura5.png)
 
-Le pondremos las métricas de traefic para las request de los microservicios:
+Le pondremos las métricas de Traefik para las request de los microservicios:
 
 ![grafana-config](images/captura6.png)
