@@ -5,6 +5,7 @@ import (
 	"goUsers/common"
 	"net/http"
 	"github.com/gin-gonic/gin"
+	"strconv"
 )
 
 func ProfileRetrieve(c *gin.Context) {
@@ -90,6 +91,7 @@ func UsersLogin(c *gin.Context) {
 	serializer := UserSerializer{c}
 	client := common.NewRedisClient()
 	common.RedisSet("user", loginValidator.User.Email, client)
+	common.RedisSet("id_user", strconv.FormatUint(uint64(userModel.ID), 10), client)
 	c.JSON(http.StatusOK, gin.H{"user": serializer.Response()})
 }
 
