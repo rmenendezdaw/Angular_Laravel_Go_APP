@@ -6,4 +6,5 @@ export interface Song {
     album: string;
     duration: number;
     genre: string;
+    favorited: boolean;
 }// end_Song

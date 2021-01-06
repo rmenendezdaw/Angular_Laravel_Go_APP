@@ -49,4 +49,12 @@ export class SongsService {
         .pipe(map(data => data));
     }
   }
+
+  favorite(id): Observable<Song> {
+    return this.apiService.post('/songs/' + id + '/favorite');
+  }
+
+  unfavorite(id): Observable<Song> {
+    return this.apiService.delete('/songs/' + id + '/favorite');
+  }
 }
