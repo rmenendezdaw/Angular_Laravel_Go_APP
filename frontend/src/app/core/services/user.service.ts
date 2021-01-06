@@ -6,6 +6,7 @@ import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { User } from '../models';
 import { map ,  distinctUntilChanged } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 @Injectable()
@@ -19,7 +20,9 @@ export class UserService {
   constructor (
     private apiService: ApiService,
     private http: HttpClient,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private router: Router,
+
   ) {}
 
   // Verify JWT in localstorage with server & load user's info.
@@ -42,16 +45,17 @@ export class UserService {
   }
 
   getUser() {
-    return this.apiService.get('/user/');
-
-    // user.subscribe(
-    //     data => {console.log(data)},
-    //     err => {
-    //       // this.apiService.get('/user/', 'laravel_be').subscribe(data =>  console.log(data),
-    //       // err => this.purgeAuth());
-    //     }
-    //   );
-    // return user;
+    this.apiService.get('/user/', 'laravel_be')
+      .subscribe(
+        data => {
+          if (data.user.type != "admin") {
+            this.purgeAuth()
+          }// end_if
+        },
+        err => {
+          this.purgeAuth()
+        }
+      );
   }
 
   setAuth(user: User) {
@@ -70,6 +74,7 @@ export class UserService {
     this.currentUserSubject.next({} as User);
     // Set auth status to false
     this.isAuthenticatedSubject.next(false);
+    this.router.navigateByUrl('/')
   }
 
   attemptAuth(type, credentials): Observable<User> {

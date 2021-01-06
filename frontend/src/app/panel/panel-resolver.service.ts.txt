@@ -17,7 +17,9 @@ export class PanelResolver implements Resolve<User> {
     state: RouterStateSnapshot
   ): Observable<any> {
 
-    return this.userService.getUser()
+    this.userService.getUser()
+
+    return {'hola': 'hola'}
     
     ;
   }
