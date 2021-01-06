@@ -7,6 +7,7 @@ import (
 
 	"goSongs/common"
 	"goSongs/routers"
+
 )
 
 // Entry point for the program
@@ -49,6 +50,4 @@ func MakeRoutes(r *gin.Engine) {
 		*/
 	}
 	r.Use(cors)
-	// r.Use(cors.Default())
-
 }

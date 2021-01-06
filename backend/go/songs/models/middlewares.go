@@ -1,12 +1,12 @@
-package users
+package models
 
 import (
-	"github.com/dgrijalva/jwt-go"
-	"github.com/dgrijalva/jwt-go/request"
-	"goApp/common"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
+	"goSongs/common"
+	"github.com/dgrijalva/jwt-go"
+	"github.com/dgrijalva/jwt-go/request"
+	"github.com/gin-gonic/gin"
 )
 
 // Strips 'TOKEN ' prefix from token string

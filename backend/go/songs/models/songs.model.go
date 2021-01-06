@@ -9,4 +9,3 @@ type Songs struct {
 	Duration    string `json:"duration"`
 	Genre       string `json:"genre"`
 }
-

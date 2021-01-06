@@ -1,6 +1,7 @@
 <div class="meta-song-card">
     <section class="btn-card">
         <button class="btn-card delete" (click)="deleteSong()">X</button>
+        <button class="btn-card modify"  [routerLink]="['/editor', song.id]">Modify</button>
     </section>
     <div class = "song-meta row-song" [routerLink]="['/song', song.id ]" >
         <div class = "container-song-list">

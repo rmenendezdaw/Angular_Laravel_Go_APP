@@ -1,0 +1,25 @@
+  # Docker configuration backend
+providers:
+  docker:
+    defaultRule: "Host(`{{ trimPrefix `/` .Name }}.docker.localhost`)"
+
+# API and dashboard configuration
+api:
+  insecure: true
+
+entryPoints:
+  metrics:
+    address: ":8082"
+
+
+metrics:
+  prometheus: 
+    entryPoint: metrics
+    # addServicesLabels: true
+    # manualRouting: true
+    # buckets:
+    #   - 0.1
+    #   - 0.3
+    #   - 1.2
+    #   - 5.0
+

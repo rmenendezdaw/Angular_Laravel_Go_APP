@@ -16,7 +16,7 @@ const routes: Routes = [
     component: EditorComponent,
     canActivate: [AuthGuard],
     resolve: {
-      article: EditableArticleResolver
+      song: EditableArticleResolver
     }
   }
 ];

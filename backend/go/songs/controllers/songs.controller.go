@@ -1,12 +1,10 @@
 package controllers
 
 import (
-
 	"goSongs/common"
 	// "errors"
 	"fmt"
 	// "os"
-	// "github.com/garyburd/redigo/redis"
 )
 
 //Create a Song
@@ -46,7 +44,7 @@ func DeleteAllSongs(data interface{}) error {
 }
 
 //Get song by ID
-func GetSongByID(data, id interface{}) error {
+func GetSongByID(data, id interface{}) (error) {
 	db := common.GetDB()
 	err := db.Where("id = ?", id).First(data).Error
 	return err

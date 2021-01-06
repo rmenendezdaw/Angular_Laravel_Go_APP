@@ -7,5 +7,10 @@
           <div>{{ song.title }}</div>
           <div>{{ song.artist }}</div>
       </div>
+      <app-favorite-button
+          [song]="song"
+          (toggle)="onToggleFavorite($event)"
+          class="pull-xs-right">
+        </app-favorite-button>
   </div>
 </div>

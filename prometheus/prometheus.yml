@@ -1,0 +1,8 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 30s
+scrape_configs:
+  - job_name: "traefik-prometheus"
+    honor_labels: true
+    static_configs:
+      - targets: ["traefik_container:8082"]

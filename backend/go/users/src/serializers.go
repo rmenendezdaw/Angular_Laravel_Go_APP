@@ -1,9 +1,8 @@
-package users
+package src
 
 import (
 	"github.com/gin-gonic/gin"
-
-	"goApp/common"
+	"goUsers/common"
 )
 
 type ProfileSerializer struct {
@@ -43,8 +42,7 @@ type UserResponse struct {
 	Bio      string  `json:"bio"`
 	Image    *string `json:"image"`
 	Token    string  `json:"token"`
-	Type   	 string  `json:"type"`
-
+	Type     string  `json:"type"`
 }
 
 func (self *UserSerializer) Response() UserResponse {
@@ -55,7 +53,7 @@ func (self *UserSerializer) Response() UserResponse {
 		Bio:      myUserModel.Bio,
 		Image:    myUserModel.Image,
 		Token:    common.GenToken(myUserModel.ID),
-		Type:	  myUserModel.Type,
+		Type:     myUserModel.Type,
 	}
 	return user
 }

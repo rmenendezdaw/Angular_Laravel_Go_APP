@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { Article, ArticlesService, UserService } from '../core';
+import { Song, SongsService, UserService } from '../core';
 import { catchError ,  map } from 'rxjs/operators';
 
 @Injectable()
-export class EditableArticleResolver implements Resolve<Article> {
+export class EditableArticleResolver implements Resolve<Song> {
   constructor(
-    private articlesService: ArticlesService,
+    private songsService: SongsService,
     private router: Router,
     private userService: UserService
   ) { }
@@ -18,15 +18,11 @@ export class EditableArticleResolver implements Resolve<Article> {
     state: RouterStateSnapshot
   ): Observable<any> {
 
-    return this.articlesService.get(route.params['slug'])
+    return this.songsService.getLaravel(route.params['slug'])
       .pipe(
         map(
-          article => {
-            if (this.userService.getCurrentUser().username === article.author.username) {
-              return article;
-            } else {
-              this.router.navigateByUrl('/');
-            }
+          song => {
+              return song;
           }
         ),
         catchError((err) => this.router.navigateByUrl('/'))

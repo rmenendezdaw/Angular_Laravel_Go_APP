@@ -1,27 +1,11 @@
-package users
+package src
 
 import (
 	"errors"
-	"goApp/common"
-	"github.com/gin-gonic/gin"
+	"goUsers/common"
 	"net/http"
+	"github.com/gin-gonic/gin"
 )
-
-func UsersRegister(router *gin.RouterGroup) {
-	router.POST("/", UsersRegistration)
-	router.POST("/login", UsersLogin)
-}
-
-func UserRegister(router *gin.RouterGroup) {
-	router.GET("/", UserRetrieve)
-	router.PUT("/", UserUpdate)
-}
-
-func ProfileRegister(router *gin.RouterGroup) {
-	router.GET("/:username", ProfileRetrieve)
-	router.POST("/:username/follow", ProfileFollow)
-	router.DELETE("/:username/follow", ProfileUnfollow)
-}
 
 func ProfileRetrieve(c *gin.Context) {
 	username := c.Param("username")
@@ -104,6 +88,8 @@ func UsersLogin(c *gin.Context) {
 	}
 	UpdateContextUserModel(c, userModel.ID)
 	serializer := UserSerializer{c}
+	client := common.NewRedisClient()
+	common.RedisSet("user", loginValidator.User.Email, client)
 	c.JSON(http.StatusOK, gin.H{"user": serializer.Response()})
 }
 

@@ -1,9 +1,9 @@
-package users
+package src
 
 import (
 	"errors"
+	"goUsers/common"
 	"github.com/jinzhu/gorm"
-	"goApp/common"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -19,8 +19,7 @@ type UserModel struct {
 	Bio          string  `gorm:"column:bio;size:1024"`
 	Image        *string `gorm:"column:image"`
 	PasswordHash string  `gorm:"column:password;not null"`
-	Type		 string  `gorm:"column:type;default:'client'"`
-
+	Type         string  `gorm:"column:type;default:'client'"`
 }
 
 // A hack way to save ManyToMany relationship,
@@ -72,25 +71,6 @@ func (u *UserModel) checkPassword(password string) error {
 	return bcrypt.CompareHashAndPassword(byteHashedPassword, bytePassword)
 }
 
-// You could input the conditions and it will return an UserModel in database with error info.
-// 	userModel, err := FindOneUser(&UserModel{Username: "username0"})
-func FindOneUser(condition interface{}) (UserModel, error) {
-	db := common.GetDB()
-	var model UserModel
-	err := db.Where(condition).First(&model).Error
-	return model, err
-}
-
-// You could input an UserModel which will be saved in database returning with error info
-// 	if err := SaveOne(&userModel); err != nil { ... }
-func SaveOne(data interface{}) error {
-	db := common.GetDB()
-	err := db.Save(data).Error
-	return err
-}
-
-// You could update properties of an UserModel to database returning with error info.
-//  err := db.Model(userModel).Update(UserModel{Username: "wangzitian0"}).Error
 func (model *UserModel) Update(data interface{}) error {
 	db := common.GetDB()
 	err := db.Model(model).Update(data).Error

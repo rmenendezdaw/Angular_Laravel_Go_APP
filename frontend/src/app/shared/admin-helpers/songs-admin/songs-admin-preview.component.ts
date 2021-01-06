@@ -20,7 +20,7 @@ export class SongsAdminPreviewComponent {
       .subscribe(
         success => {
           console.log('Done');
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/admin');
         }
       );
   }

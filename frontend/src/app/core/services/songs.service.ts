@@ -30,7 +30,31 @@ export class SongsService {
     return this.apiService.delete('/songs/' + id);
   }
 
+  getLaravel(id): Observable<Song> {
+    return this.apiService.get('/songs/' + id, 'laravel_be')
+      .pipe(map(data => data.song));
+  }// end_get
+
   getAllSongsAdmin(): Observable<Song[]> {
     return this.apiService.get('/songs', 'laravel_be');
   }// end_getAllSongsAdmin
+
+  save(song): Observable<Song> {
+    if (song.id) {
+      return this.apiService.putLaravel('/songs/' + song.id, {song: song})
+        .pipe(map(data => data));
+
+    } else {
+      return this.apiService.postLaravel('/songs/', {song: song})
+        .pipe(map(data => data));
+    }
+  }
+
+  favorite(id): Observable<Song> {
+    return this.apiService.post('/songs/' + id + '/favorite');
+  }
+
+  unfavorite(id): Observable<Song> {
+    return this.apiService.delete('/songs/' + id + '/favorite');
+  }
 }

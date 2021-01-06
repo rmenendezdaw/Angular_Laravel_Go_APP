@@ -17,8 +17,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.userService.currentUser.subscribe(
       (userData) => {
-        console.log("TYPEEEEEEE")
-        console.log(userData)
+        console.log(userData.type);
         this.currentUser = userData;
         this.type = userData.type;
       }

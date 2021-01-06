@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-
+import { UserService } from '../core';
 
 @Component({
   selector: 'app-panel',
@@ -10,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class PanelComponent implements OnInit {
 
   constructor(
+    private userService: UserService
   ) { }
 
   ngOnInit() {
     console.log('panel component');
+    this.userService.getUser()
   }
 }
