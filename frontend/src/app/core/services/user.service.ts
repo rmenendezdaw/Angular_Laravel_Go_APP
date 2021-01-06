@@ -53,7 +53,11 @@ export class UserService {
           }// end_if
         },
         err => {
-          this.purgeAuth()
+          if (err) {
+            if (err.errors.message = "JWT error: Token is invalid") {
+              this.purgeAuth()
+            }
+          }
         }
       );
   }
