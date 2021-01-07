@@ -20,7 +20,8 @@ export class FavoriteButtonComponent {
   @Output() toggle = new EventEmitter<boolean>();
   isSubmitting = false;
 
-  toggleFavorite() {
+  toggleFavorite(event) {
+    event.stopPropagation();
     this.isSubmitting = true;
 
     this.userService.isAuthenticated.pipe(concatMap(
@@ -32,7 +33,7 @@ export class FavoriteButtonComponent {
         }
 
         // Favorite the article if it isn't favorited yet
-        // if (!this.song.favorited) {
+        if (!this.song.favorited) {
           return this.songsService.favorite(this.song.id)
           .pipe(tap(
             data => {
@@ -43,7 +44,7 @@ export class FavoriteButtonComponent {
           ));
 
         // Otherwise, unfavorite the article
-        // } else {
+        } else {
           return this.songsService.unfavorite(this.song.id)
           .pipe(tap(
             data => {
@@ -52,7 +53,7 @@ export class FavoriteButtonComponent {
             },
             err => this.isSubmitting = false
           ));
-        // }
+        }
 
       }
     )).subscribe();
