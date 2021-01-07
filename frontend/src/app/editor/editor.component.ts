@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import { Song, SongsService } from '../core'
 
@@ -19,6 +20,7 @@ export class EditorComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
+    private toastr: ToastrService
   ) {
     // use the FormBuilder to create a form group
     this.songForm = this.fb.group({
@@ -55,9 +57,11 @@ export class EditorComponent implements OnInit {
     this.songsService.save(this.song).subscribe(
       data => {
         console.log(data);
+        this.toastr.success('Song Created', 'Create');
         this.router.navigateByUrl('/admin')
       }, 
       err => {
+        this.toastr.error('Something Happens...', 'Create');
         this.errors = err;
         this.isSubmitting = false;
       }
