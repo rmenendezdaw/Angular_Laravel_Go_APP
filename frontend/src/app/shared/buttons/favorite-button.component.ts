@@ -32,6 +32,8 @@ export class FavoriteButtonComponent {
           return of(null);
         }
 
+        console.log(this.song);
+
         // Favorite the article if it isn't favorited yet
         if (!this.song.favorited) {
           return this.songsService.favorite(this.song.id)

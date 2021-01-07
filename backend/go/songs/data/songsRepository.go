@@ -32,7 +32,8 @@ func SongList(c *gin.Context) {
 		c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
-		c.JSON(http.StatusOK, song)
+		serializer := models.SongsSerializer{c, song}
+		c.JSON(http.StatusOK, gin.H{"songs": serializer.Response()})
 	}
 }
 
@@ -44,7 +45,8 @@ func SongById(c *gin.Context) {
 		c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
-		c.JSON(http.StatusOK, gin.H{"song": song})
+		serializer := models.SongSerializer{c, song}
+		c.JSON(http.StatusOK, gin.H{"song": serializer.Response()})
 		return
 	}
 }

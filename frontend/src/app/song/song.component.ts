@@ -34,7 +34,6 @@ export class SongComponent implements OnInit {
     this.route.data.subscribe(
       (data: { song: Song }) => {
         this.song = data.song;
-
         // Load the comments on this song
       }
     );
