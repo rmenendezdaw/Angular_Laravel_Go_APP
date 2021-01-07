@@ -35,6 +35,13 @@ type UserModel struct {
 	Type         string  `gorm:"column:type;default:'client'"`
 }
 
+func AutoMigrate() {
+	db := common.GetDB()
+
+	db.AutoMigrate(&SongUserModel{})
+	db.AutoMigrate(&FavoriteModel{})
+}
+
 func GetSongUserModel(userModel UserModel) SongUserModel {
 	var songUserModel SongUserModel
 	if userModel.ID == 0 {
@@ -91,4 +98,18 @@ func SongFavorite(c *gin.Context) {
 	// c.JSON(http.StatusOK, gin.H{"song": serializer.Response()})
 	c.JSON(http.StatusOK, gin.H{"song": "test"})
 
+}
+
+func SongUnfavorite(c *gin.Context) {
+	id := c.Params.ByName("id")
+	var song Songs
+	err := controllers.GetSongByID(&song, id)
+	if err != nil {
+		c.JSON(http.StatusNotFound, common.NewError("songs", errors.New("Invalid ID")))
+		return
+	}
+	myUserModel := c.MustGet("my_user_model").(UserModel)
+	err = song.unFavoriteBy(GetSongUserModel(myUserModel))
+	// serializer := ArticleSerializer{c, articleModel}
+	c.JSON(http.StatusOK, gin.H{"song": "delete"})
 }

@@ -12,7 +12,7 @@ func SongsRegister(router *gin.RouterGroup) {
 	router.DELETE("/:id", data.SongDelete)
 	router.DELETE("/", data.SongDeleteAll)
 	router.POST("/:id/favorite", models.SongFavorite)
-	// router.DELETE("/:id/favorite", data.SongUnfavorite)
+	router.DELETE("/:id/favorite", models.SongUnfavorite)
 
 }
 

@@ -3,16 +3,23 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	// "github.com/jinzhu/gorm"
-
+	"github.com/jinzhu/gorm"
+	"goSongs/models"
 	"goSongs/common"
 	"goSongs/routers"
 
+
 )
+
+func Migrate(db *gorm.DB) {
+	models.AutoMigrate()
+	// awards.AutoMigrate()
+}
 
 // Entry point for the program
 func main() {
 	db := common.Init()
+	Migrate(db)
 	defer db.Close()
 
 	r := gin.Default()
@@ -20,9 +27,13 @@ func main() {
 
 	v1 := r.Group("/api")
 
-	routers.SongsRegister(v1.Group("/songs"))
+	v1.Use(models.AuthMiddleware(false))
 	routers.SongsAnonymousRegister(v1.Group("/songs"))
+	
+	v1.Use(models.AuthMiddleware(true))
+	routers.SongsRegister(v1.Group("/songs"))
 
+	
 	fmt.Printf("0.0.0.0:3001")
 	r.Run(":3001")
 }
