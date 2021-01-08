@@ -11,6 +11,17 @@
 |
 */
 
+$factory -> define(App\Song::class, function (\Faker\Generator $faker) {
+    return [
+        'title' => $faker -> sentence(2),
+        'artist' => $faker -> name,
+        'release_date' => $faker -> year,
+        'album' => $faker -> sentence(3),
+        'duration' => $faker -> numberBetween($min = 200, $max = 350),
+        'genre' => $faker -> sentence(1)
+    ];
+});
+
 $factory->define(App\User::class, function (\Faker\Generator $faker) {
 
     return [
