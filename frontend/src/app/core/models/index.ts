@@ -5,3 +5,4 @@ export * from './errors.model';
 export * from './profile.model';
 export * from './user.model';
 export * from './song.models';
+export * from './song-list-config.model';
