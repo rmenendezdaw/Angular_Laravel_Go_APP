@@ -8,4 +8,5 @@ type Songs struct {
 	Album       string `json:"album"`
 	Duration    string `json:"duration"`
 	Genre       string `json:"genre"`
+	Views		int	   `json:views`
 }

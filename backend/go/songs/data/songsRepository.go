@@ -45,6 +45,7 @@ func SongById(c *gin.Context) {
 		c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
+		err = controllers.IncSongViews(id)
 		serializer := models.SongSerializer{c, song}
 		c.JSON(http.StatusOK, gin.H{"song": serializer.Response()})
 		return

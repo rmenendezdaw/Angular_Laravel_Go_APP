@@ -7,12 +7,14 @@ import (
 type SongResponse struct {
 	Id             uint                  `json:"id"`
 	Title          string                `json:"title"`
-	Artist          string                `json:"artist"`
+	Artist         string                `json:"artist"`
 	ReleaseDate    string                `json:"release_date"`
-	Album           string                `json:"album"`
-	Duration      string                `json:"duration"`
-	Genre         string 					`json:"genre"`
+	Album          string                `json:"album"`
+	Duration       string                `json:"duration"`
+	Genre          string 				 `json:"genre"`
 	Favorite       bool                  `json:"favorited"`
+	Views		   int					 `json:views`
+
 }
 
 type SongsSerializer struct {
@@ -36,6 +38,7 @@ func (s *SongSerializer) Response() SongResponse {
 		Duration:		s.Duration,
 		Genre:         	s.Genre,
 		Favorite:       s.isFavoriteBy(GetSongUserModel(myUserModel)),
+		Views:			s.Views,
 	}
 	
 	return response

@@ -13,7 +13,6 @@ import (
 
 func Migrate(db *gorm.DB) {
 	models.AutoMigrate()
-	// awards.AutoMigrate()
 }
 
 // Entry point for the program
