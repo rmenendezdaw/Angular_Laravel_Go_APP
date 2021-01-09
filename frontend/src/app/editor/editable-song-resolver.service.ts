@@ -6,7 +6,7 @@ import { Song, SongsService, UserService } from '../core';
 import { catchError ,  map } from 'rxjs/operators';
 
 @Injectable()
-export class EditableArticleResolver implements Resolve<Song> {
+export class EditableSongResolver implements Resolve<Song> {
   constructor(
     private songsService: SongsService,
     private router: Router,

@@ -21,6 +21,7 @@ class Songs extends Migration
             $table -> string('album') -> nullable();
             $table -> integer('duration');
             $table -> string('genre');
+            $table -> integer('views');
             $table -> rememberToken();
             $table -> timestamps();
         });
