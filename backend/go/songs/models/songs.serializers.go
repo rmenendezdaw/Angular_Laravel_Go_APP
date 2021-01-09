@@ -13,7 +13,7 @@ type SongResponse struct {
 	Duration       string                `json:"duration"`
 	Genre          string 				 `json:"genre"`
 	Favorite       bool                  `json:"favorited"`
-	Views		   int					 `json:views`
+	Views		   int					 `json:"views"`
 
 }
 

@@ -11,7 +11,7 @@ services:
     command: >
       bash -c " composer install
       && php artisan route:list
-      && php artisan migrate --no-interaction
+      && php artisan migrate
       && php artisan key:generate
       && php artisan db:seed
       && php artisan jwt:secret --no-interaction

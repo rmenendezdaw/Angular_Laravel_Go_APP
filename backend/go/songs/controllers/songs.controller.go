@@ -53,6 +53,6 @@ func GetSongByID(data, id interface{}) (error) {
 //Increment views of Songs
 func IncSongViews(id interface{}) error {
     db := common.GetDB()
-    err := db.Where("id = ?", id).Update("views", gorm.Expr("views + 1")).Error
+    err := db.Table("songs").Where("id = ?", id).Update("views", gorm.Expr("views + 1")).Error
     return err
 }
