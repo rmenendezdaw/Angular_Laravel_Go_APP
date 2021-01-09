@@ -26,7 +26,7 @@ class CreateSong extends ApiRequest
             'artist' => 'required|string|max:255',
             'release_date' => 'required|string|max:255',
             'album' => 'required|string|max:255',
-            'duration' => 'required|integer|max:255',
+            'duration' => 'required|integer|max:350',
             'genre' => 'required|string|max:255'
         ];
     }

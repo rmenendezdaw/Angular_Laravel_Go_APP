@@ -5,11 +5,20 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\CreateSong;
+use App\Http\Requests\Api\UpdateSong;
+use App\RealWorld\Transformers\SongTransformer;
+
+
 
 use Redis;
 use App\Song;
 
-class SongController extends Controller {
+class SongController extends ApiController {
+    public function __construct(SongTransformer $transformer)
+    {
+        $this -> transformer = $transformer;
+    }
+
     public function store(CreateSong $request) {
         
         $song = new Song();
@@ -23,14 +32,15 @@ class SongController extends Controller {
         
         $song -> save();
 
-        return response() -> json($song);
+        return $this -> respondWithTransformer($song);
+
 
     }// end_create
 
     public function index() {
         $songs = Song::all();
 
-        return response() -> json($songs);
+        return $this -> respondWithTransformer($songs);
     }// end_show
 
     public function show($id) {
@@ -38,10 +48,10 @@ class SongController extends Controller {
 
         $response = ["song" => $song];
 
-        return response() -> json($response);
+        return $this -> respondWithTransformer($song);
     }// end_showSong
 
-    public function update(Request $request, $id) {
+    public function update(UpdateSong $request, $id) {
         $song = Song::find($id);
 
         if (!$song) return response() -> json('Not Found');
@@ -55,7 +65,7 @@ class SongController extends Controller {
 
         $song -> save();
 
-        return response() -> json($song);
+        return $this -> respondWithTransformer($song);
     }// end_update
 
     public function destroy($id) {
@@ -65,6 +75,6 @@ class SongController extends Controller {
 
         $song -> delete();
 
-        return response() -> json($song);
+        return $this -> respondSuccess();
     }// end_delete
 }// end_SongController
