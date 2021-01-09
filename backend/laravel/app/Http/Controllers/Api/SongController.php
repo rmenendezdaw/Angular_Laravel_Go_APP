@@ -10,7 +10,7 @@ use Redis;
 use App\Song;
 
 class SongController extends Controller {
-    public function store(Request $request) {
+    public function store(CreateSong $request) {
         
         $song = new Song();
         

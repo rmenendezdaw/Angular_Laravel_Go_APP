@@ -15,8 +15,7 @@ export class SongsComponent implements OnInit {
   ngOnInit() {
     this.results = [];
     this.songsService.query().subscribe(data => {
-      console.log(data);
-      this.results = data.songs;
+      this.results = data;
     })
   }
 

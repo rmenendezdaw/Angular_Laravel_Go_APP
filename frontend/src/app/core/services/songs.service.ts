@@ -19,7 +19,7 @@ export class SongsService {
     const params = {};
 
 
-    return this.apiService.get('/songs');
+    return this.apiService.get('/songs').pipe(map(data => data.songs));
   }// end_query
 
   get(id): Observable<Song> {
