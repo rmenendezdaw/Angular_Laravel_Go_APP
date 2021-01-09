@@ -18,7 +18,8 @@ $factory -> define(App\Song::class, function (\Faker\Generator $faker) {
         'release_date' => $faker -> year,
         'album' => $faker -> sentence(3),
         'duration' => $faker -> numberBetween($min = 200, $max = 350),
-        'genre' => $faker -> sentence(1)
+        'genre' => $faker -> sentence(1),
+        'views' => $faker -> numberBetween($min = 1, $max = 1000),
     ];
 });
 
