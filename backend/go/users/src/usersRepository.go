@@ -1,6 +1,8 @@
 package src
 
 import (
+	"fmt"
+	"strings"
 	"errors"
 	"goUsers/common"
 	"net/http"
@@ -60,8 +62,11 @@ func UsersRegistration(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, common.NewValidatorError(err))
 		return
 	}
-
 	if err := SaveOne(&userModelValidator.userModel); err != nil {
+		if (strings.Contains(err.Error(), "uix_user_models_email")) {
+			c.JSON(http.StatusNotFound, common.NewError("Database:", errors.New("Email alredy in use")))
+			return			
+		}
 		c.JSON(http.StatusUnprocessableEntity, common.NewError("database", err))
 		return
 	}
