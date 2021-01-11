@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Song, SongsService, SongListConfig } from '../../core';
 
 @Component({
@@ -6,17 +6,46 @@ import { Song, SongsService, SongListConfig } from '../../core';
   templateUrl: './songs.component.html',
   styleUrls: ['./songs.component.css']
 })
-export class SongsComponent implements OnInit {
+export class SongsComponent {
   constructor(
     private songsService: SongsService) { }
 
-  results: Song[];
+    @Input() views: string;
+    @Input() release_date: string;
+    @Input()
+    set config(config: SongListConfig) {
+      if (config) {
+        this.query = config;
+        this.runQuery();
+      }
+    }
 
-  ngOnInit() {
+  query: SongListConfig
+  results: Song[];
+  loading = false;
+
+  runQuery() {
+    this.loading = true;
     this.results = [];
-    this.songsService.query().subscribe(data => {
+ 
+
+    if (this.views) {
+      this.query.filters.views = this.views;
+    }
+
+    if (this.release_date) {
+      this.query.filters.release_date = this.release_date;
+    }
+
+    console.log(this.query);
+    console.log(this.views);
+    console.log(this.release_date);
+
+    this.songsService.query()
+    .subscribe(data => {
+      this.loading = false;
       this.results = data;
-    })
+    });
   }
 
 }

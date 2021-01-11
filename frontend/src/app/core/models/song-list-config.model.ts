@@ -2,7 +2,7 @@ export interface SongListConfig {
     type: string;
   
     filters: {
-        views?: number,
+        views?: string,
         release_date?: string
     };
 }
