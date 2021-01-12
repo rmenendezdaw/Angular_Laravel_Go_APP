@@ -43,7 +43,7 @@ export class SongsService {
   }// end_get
 
   getAllSongsAdmin(): Observable<Song[]> {
-    return this.apiService.get('/songs', 'laravel_be');
+    return this.apiService.get('/songs', 'laravel_be').pipe(map(data => data.songs));;
   }// end_getAllSongsAdmin
 
   save(song): Observable<Song> {
