@@ -25,8 +25,11 @@ func SongCreate(c *gin.Context) {
 }
 
 func SongList(c *gin.Context) {
+	views := c.Query("views")
+	release_date := c.Query("release_date")
+
 	var song []models.Songs
-	err := controllers.GetAllSongs(&song)
+	err := controllers.GetAllSongs(views, release_date, &song)
 	
 	if err != nil {
 		c.JSON(http.StatusOK, "Not found")

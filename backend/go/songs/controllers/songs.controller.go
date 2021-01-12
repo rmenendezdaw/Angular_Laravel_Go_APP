@@ -16,11 +16,20 @@ func CreateSong(data interface{}) error {
 }
 
 //Get all
-func GetAllSongs(data interface{}) error {
+func GetAllSongs(views, release_date string, data interface{}) error {
 	fmt.Println(data)
 	db := common.GetDB()
-	err := db.Find(data).Error
-	return err
+
+
+	if (views != "") {
+		return db.Order("views " + views).Find(data).Error
+	}else if (release_date != "") {
+		return db.Order("views " + views).Find(data).Error
+	} else {
+		return db.Find(data).Error
+	}// end_else
+
+	// return err
 }
 
 //Update song

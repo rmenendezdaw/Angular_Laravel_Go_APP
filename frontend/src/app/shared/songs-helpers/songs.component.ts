@@ -28,7 +28,6 @@ export class SongsComponent {
     this.loading = true;
     this.results = [];
  
-
     if (this.views) {
       this.query.filters.views = this.views;
     }
@@ -37,11 +36,7 @@ export class SongsComponent {
       this.query.filters.release_date = this.release_date;
     }
 
-    console.log(this.query);
-    console.log(this.views);
-    console.log(this.release_date);
-
-    this.songsService.query()
+    this.songsService.query(this.query)
     .subscribe(data => {
       this.loading = false;
       this.results = data;

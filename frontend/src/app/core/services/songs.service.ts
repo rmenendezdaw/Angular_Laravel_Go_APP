@@ -3,7 +3,7 @@ import { HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiService } from './api.service';
-import { Song } from '../models';
+import { Song, SongListConfig } from '../models';
 import { map } from 'rxjs/operators';
 
 
@@ -15,11 +15,18 @@ export class SongsService {
   constructor(private apiService: ApiService) { 
   }
 
-  query(): Observable<Song[]> {
+  query(query: SongListConfig): Observable<Song[]> {
     const params = {};
 
+    Object.keys(query.filters)
+    .forEach((key) => {
+      params[key] = query.filters[key];
+    });
 
-    return this.apiService.get('/songs').pipe(map(data => data.songs));
+    console.log(params);
+
+    return this.apiService.get('/songs', 'api_url', new HttpParams({ fromObject: params }))
+    .pipe(map(data => data.songs));
   }// end_query
 
   get(id): Observable<Song> {
