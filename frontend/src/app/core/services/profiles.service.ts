@@ -12,7 +12,7 @@ export class ProfilesService {
   ) {}
 
   get(username: string): Observable<Profile> {
-    return this.apiService.get('/profiles/' + username)
+    return this.apiService.get('/user/profiles/' + username)
       .pipe(map((data: {profile: Profile}) => data.profile));
   }
 

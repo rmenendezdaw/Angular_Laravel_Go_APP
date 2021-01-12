@@ -29,7 +29,6 @@ func main() {
 
 	v1.Use(src.AuthMiddleware(true))
 	src.UserRegister(v1.Group("/user"))
-	src.ProfileRegister(v1.Group("/profiles"))
 
 	fmt.Printf("0.0.0.0:3000")
 	r.Run(":3000")

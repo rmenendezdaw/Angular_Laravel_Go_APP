@@ -12,10 +12,7 @@ func UsersRegister(router *gin.RouterGroup) {
 func UserRegister(router *gin.RouterGroup) {
 	router.GET("/", UserRetrieve)
 	router.PUT("/", UserUpdate)
-}
-
-func ProfileRegister(router *gin.RouterGroup) {
-	router.GET("/:username", ProfileRetrieve)
+	router.GET("/profiles/:username", ProfileRetrieve)
 	router.POST("/:username/follow", ProfileFollow)
 	router.DELETE("/:username/follow", ProfileUnfollow)
 }

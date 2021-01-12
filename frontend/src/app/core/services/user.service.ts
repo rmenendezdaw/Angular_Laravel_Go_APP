@@ -50,12 +50,15 @@ export class UserService {
         data => {
           if (data.user.type != "admin") {
             this.purgeAuth()
+            this.router.navigateByUrl('/')
           }// end_if
         },
         err => {
+          console.log(err);
           if (err) {
             if (err.errors.message = "JWT error: Token is invalid") {
               this.purgeAuth()
+              this.router.navigateByUrl('/')
             }
           }
         }
@@ -78,7 +81,6 @@ export class UserService {
     this.currentUserSubject.next({} as User);
     // Set auth status to false
     this.isAuthenticatedSubject.next(false);
-    this.router.navigateByUrl('/')
   }
 
   attemptAuth(type, credentials): Observable<User> {

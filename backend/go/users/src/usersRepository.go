@@ -1,6 +1,7 @@
 package src
 
 import (
+	"fmt"
 	"strings"
 	"errors"
 	"goUsers/common"
@@ -11,6 +12,7 @@ import (
 
 func ProfileRetrieve(c *gin.Context) {
 	username := c.Param("username")
+	fmt.Println("hola");
 	userModel, err := FindOneUser(&UserModel{Username: username})
 	if err != nil {
 		c.JSON(http.StatusNotFound, common.NewError("profile", errors.New("Invalid username")))

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { User, UserService, Profile } from '../core';
+import { User, UserService, Profile, SongListConfig } from '../core';
 import { concatMap ,  tap } from 'rxjs/operators';
 
 @Component({
@@ -17,6 +17,11 @@ export class ProfileComponent implements OnInit {
   profile: Profile;
   currentUser: User;
   isUser: boolean;
+
+  favoritesConfig: SongListConfig = {
+    type: 'all',
+    filters: {}
+  };
 
   ngOnInit() {
     this.route.data.pipe(
