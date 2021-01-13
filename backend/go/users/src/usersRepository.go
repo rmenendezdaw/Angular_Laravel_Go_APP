@@ -63,7 +63,9 @@ func UsersRegistration(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, common.NewValidatorError(err))
 		return
 	}
+	// err := SaveOne(&userModelValidator.userModel)
 	if err := SaveOne(&userModelValidator.userModel); err != nil {
+		fmt.Println("hola");
 		if (strings.Contains(err.Error(), "uix_user_models_email")) {
 			c.JSON(http.StatusNotFound, common.NewError("Database:", errors.New("Email alredy in use")))
 			return			

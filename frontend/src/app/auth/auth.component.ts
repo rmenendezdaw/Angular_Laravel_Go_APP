@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -53,9 +54,11 @@ export class AuthComponent implements OnInit {
     .attemptAuth(this.authType, credentials)
     .subscribe(
       data => {
+        console.log(data);
         this.toastr.success('Login Succesfully', 'Login');
         this.router.navigateByUrl("/")},   
       err => {
+        console.log(err);
         this.toastr.error('Something Happens...', 'Login');
         this.errors = err ? err : '';
         this.isSubmitting = false;

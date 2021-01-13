@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   isUser: boolean;
 
   favoritesConfig: SongListConfig = {
-    type: 'all',
+    type: 'favorites',
     filters: {}
   };
 

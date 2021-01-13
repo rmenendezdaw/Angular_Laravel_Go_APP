@@ -39,7 +39,12 @@ export class SongsComponent {
     this.songsService.query(this.query)
     .subscribe(data => {
       this.loading = false;
-      this.results = data;
+      
+      if (this.query.type == "favorites") {
+          data.forEach(t => {
+            if (t.favorited == true) this.results.push(t)
+          })
+      }else this.results = data;
     });
   }
 
