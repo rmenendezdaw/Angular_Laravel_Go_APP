@@ -62,6 +62,6 @@ export class SongsService {
   }
 
   unfavorite(id): Observable<Song> {
-    return this.apiService.delete('/songs/' + id + '/favorite');
+    return this.apiService.deleteGo('/songs/' + id + '/favorite');
   }
 }

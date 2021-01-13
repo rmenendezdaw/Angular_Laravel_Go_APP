@@ -1,19 +1,18 @@
 <div class="home-page">
-
-  <div class="banner" *appShowAuthed="false">
-    <!-- <div class="container">
-      <h1 class="logo-font">conduit</h1>
-      <p>A place to share your <i>Angular</i> knowledge.</p>
-    </div> -->
-  </div>
-
   <div class="container page">
     <div class="row">
 
 
         <div *ngIf = "admin != true">
+          <h1 class = "home-title">Most Viewed Songs</h1>
           <app-songs [views] = "'desc'" [config] = "listConfig"></app-songs>
         </div>
+        
+        <!-- <div *ngIf = "admin != true" style = "margin-left: 150px;">
+          <h1 class = "home-title">Recent Songs</h1>
+          <app-songs [release_date] = "'desc'" [config] = "listConfig"></app-songs>
+        </div> -->
+
         <div class = "container-songs-admin" *ngIf="admin == true">
           <app-songs-admin></app-songs-admin>
         </div>

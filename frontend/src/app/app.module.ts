@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
+
 
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
@@ -27,6 +29,7 @@ import { CoreModule } from './core/core.module';
     AppRoutingModule,
     SongModule,
     PanelModule,
+    IvyCarouselModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
   ],

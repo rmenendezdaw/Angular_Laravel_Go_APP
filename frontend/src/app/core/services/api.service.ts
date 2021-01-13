@@ -54,6 +54,12 @@ export class ApiService {
     ).pipe(catchError(this.formatErrors));
   }
 
+  deleteGo(path): Observable<any> {
+    return this.http.delete(
+      `${environment.api_url}${path}`
+    ).pipe(catchError(this.formatErrors));
+  }
+
   delete(path): Observable<any> {
     return this.http.delete(
       `${environment.laravel_be}${path}`

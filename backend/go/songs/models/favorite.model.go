@@ -77,7 +77,7 @@ func (song Songs) favoriteBy(user SongUserModel) error {
 
 func (song Songs) unFavoriteBy(user SongUserModel) error {
 	db := common.GetDB()
-	err := db.Where(FavoriteModel{
+	err := db.Unscoped().Where(FavoriteModel{
 		FavoriteID:   song.Id,
 		FavoriteByID: user.ID,
 	}).Delete(FavoriteModel{}).Error
