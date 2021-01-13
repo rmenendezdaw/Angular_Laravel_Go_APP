@@ -10,16 +10,17 @@
   <div class="container page">
     <div class="row">
 
-      <div class="col-md-9">
 
-        <div>
+        <div *ngIf = "admin != true">
           <app-songs [views] = "'desc'" [config] = "listConfig"></app-songs>
+        </div>
+        <div class = "container-songs-admin" *ngIf="admin == true">
+          <app-songs-admin></app-songs-admin>
         </div>
 
 
         <!-- <app-article-list [limit]="10" [config]="listConfig"></app-article-list> -->
         
-      </div>
 
       <!-- <div class="col-md-3">
         <div class="sidebar">

@@ -5,3 +5,13 @@
 .tag-pill{
   cursor:pointer;
 }
+
+.container-songs-admin {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: max-content;
+  box-sizing: border-box;
+
+}
+

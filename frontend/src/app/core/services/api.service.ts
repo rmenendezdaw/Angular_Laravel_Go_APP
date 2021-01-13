@@ -56,7 +56,7 @@ export class ApiService {
 
   delete(path): Observable<any> {
     return this.http.delete(
-      `${environment.api_url}${path}`
+      `${environment.laravel_be}${path}`
     ).pipe(catchError(this.formatErrors));
   }
 }

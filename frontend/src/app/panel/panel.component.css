@@ -1,0 +1,5 @@
+.row-admin {
+    display: flex;
+    flex-wrap: wrap;
+    width: max-content;
+}

@@ -54,8 +54,7 @@ export class AuthComponent implements OnInit {
     .subscribe(
       data => {
         this.toastr.success('Login Succesfully', 'Login');
-        let route = (data['user'].type === 'admin') ? '/admin' : '/';
-        this.router.navigateByUrl(route)},   
+        this.router.navigateByUrl("/")},   
       err => {
         this.toastr.error('Something Happens...', 'Login');
         this.errors = err ? err : '';

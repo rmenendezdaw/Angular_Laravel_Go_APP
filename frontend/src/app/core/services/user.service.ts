@@ -90,7 +90,7 @@ export class UserService {
     user.subscribe(data => {
       if (data.user.type == 'admin') {
         let admin = this.apiService.postLaravel('/users' + route, {user: credentials})
-        admin.subscribe((data => {console.log(data.user);this.setAuth(data.user); return data}))
+        admin.subscribe((data => {;this.setAuth(data.user); return data}))
         return admin;
       }else this.setAuth(data.user);
     })
