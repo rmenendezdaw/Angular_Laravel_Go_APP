@@ -6,6 +6,7 @@ import (
 	// "errors"
 	"fmt"
 	// "os"
+	"strconv"
 )
 
 //Create a Song
@@ -16,17 +17,26 @@ func CreateSong(data interface{}) error {
 }
 
 //Get all
-func GetAllSongs(views, release_date string, data interface{}) error {
+func GetAllSongs(views, release_date, offset, limit string, data interface{}) error {
 	fmt.Println(data)
 	db := common.GetDB()
 
+	offset_int, err := strconv.Atoi(offset)
+	if err != nil {
+		offset_int = 0
+	}
+
+	limit_int, err := strconv.Atoi(limit)
+	if err != nil {
+		limit_int = 20
+	}
 
 	if (views != "") {
-		return db.Order("views " + views).Find(data).Error
+		return db.Order("views " + views).Offset(offset_int).Limit(limit_int).Find(data).Error
 	}else if (release_date != "") {
-		return db.Order("views " + views).Find(data).Error
+		return db.Order("views " + views).Offset(offset_int).Limit(limit_int).Find(data).Error
 	} else {
-		return db.Find(data).Error
+		return db.Offset(offset_int).Limit(limit_int).Find(data).Error
 	}// end_else
 
 	// return err

@@ -2,6 +2,7 @@ package data
 
 import (
 	// "time"
+	"fmt"
 	"errors"
 	"goSongs/common"
 	"goSongs/controllers"
@@ -27,9 +28,13 @@ func SongCreate(c *gin.Context) {
 func SongList(c *gin.Context) {
 	views := c.Query("views")
 	release_date := c.Query("release_date")
+	limit := c.Query("limit")
+	offset := c.Query("offset")
+
+	fmt.Println(limit)
 
 	var song []models.Songs
-	err := controllers.GetAllSongs(views, release_date, &song)
+	err := controllers.GetAllSongs(views, release_date, offset, limit, &song)
 	
 	if err != nil {
 		c.JSON(http.StatusOK, "Not found")
