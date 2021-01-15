@@ -4,6 +4,8 @@ export interface SongListConfig {
     filters: {
         views?: string,
         release_date?: string
+        limit?: number,
+        offset?: number
     };
 }
   

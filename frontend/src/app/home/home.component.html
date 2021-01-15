@@ -5,7 +5,7 @@
 
         <div *ngIf = "admin != true">
           <h1 class = "home-title">Most Viewed Songs</h1>
-          <app-songs [views] = "'desc'" [config] = "listConfig"></app-songs>
+          <app-songs [limit] = "10" [views] = "'desc'" [config] = "listConfig"></app-songs>
         </div>
         
         <!-- <div *ngIf = "admin != true" style = "margin-left: 150px;">
