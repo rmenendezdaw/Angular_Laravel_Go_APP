@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
-
+    "strconv"
+    // "reflect"
 	"github.com/dgrijalva/jwt-go"
 	"gopkg.in/go-playground/validator.v8"
 
@@ -80,4 +81,15 @@ func NewError(key string, err error) CommonError {
 func Bind(c *gin.Context, obj interface{}) error {
 	b := binding.Default(c.Request.Method, c.ContentType())
 	return c.ShouldBindWith(obj, b)
+}
+
+func SetUserRedis(email, token string) {
+	client := NewRedisClient()
+	err, users := RedisGet("currentUsers", client)
+	usersInt := 0
+	if (users != "") {usersInt, err = strconv.Atoi(users)}
+	fmt.Println(err)
+	RedisSet("user", email, client)
+	RedisSet("token", token, client)
+	RedisSet("currentUsers", usersInt + 1, client)
 }

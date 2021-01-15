@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\UpdateUser;
 use App\RealWorld\Transformers\UserTransformer;
 
+use Redis;
+
 class UserController extends ApiController
 {
     /**
@@ -28,6 +30,10 @@ class UserController extends ApiController
     {
         return $this->respondWithTransformer(auth()->user());
     }
+
+    public function getLogins() {
+        return response() -> json(Redis::get('currentUsers'));
+    }// end_getLogins
 
     /**
      * Update the authenticated user and return the user if successful.

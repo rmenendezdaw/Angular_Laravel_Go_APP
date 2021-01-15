@@ -15,5 +15,6 @@ func UserRegister(router *gin.RouterGroup) {
 	router.GET("/profiles/:username", ProfileRetrieve)
 	router.POST("/:username/follow", ProfileFollow)
 	router.DELETE("/:username/follow", ProfileUnfollow)
+	// router.DELETE("/logout", UserLogout)
 }
 

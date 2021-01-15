@@ -8,6 +8,8 @@ use App\Http\Requests\Api\LoginUser;
 use App\Http\Requests\Api\RegisterUser;
 use App\RealWorld\Transformers\UserTransformer;
 
+use Redis;
+
 class AuthController extends ApiController
 {
     /**
@@ -29,7 +31,15 @@ class AuthController extends ApiController
     public function login(LoginUser $request)
     {
         $credentials = $request->only('user.email', 'user.password');
+        $email = $request["user"]["email"];
         $credentials = $credentials['user'];
+
+        // echo Redis::get("user");
+        // echo Redis::get("token");
+
+        if ($email != Redis::get("user")) {
+            return $this -> respondFailedLogin();
+        }
 
         if (! Auth::once($credentials)) {
             return $this->respondFailedLogin();

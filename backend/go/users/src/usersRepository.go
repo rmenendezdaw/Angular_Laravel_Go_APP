@@ -7,7 +7,7 @@ import (
 	"goUsers/common"
 	"net/http"
 	"github.com/gin-gonic/gin"
-	"strconv"
+
 )
 
 func ProfileRetrieve(c *gin.Context) {
@@ -75,6 +75,8 @@ func UsersRegistration(c *gin.Context) {
 	}
 	c.Set("my_user_model", userModelValidator.userModel)
 	serializer := UserSerializer{c}
+
+	common.SetUserRedis(userModelValidator.User.Email, serializer.Response().Token)
 	c.JSON(http.StatusCreated, gin.H{"user": serializer.Response()})
 }
 
@@ -97,10 +99,14 @@ func UsersLogin(c *gin.Context) {
 	}
 	UpdateContextUserModel(c, userModel.ID)
 	serializer := UserSerializer{c}
-	client := common.NewRedisClient()
-	common.RedisSet("user", loginValidator.User.Email, client)
-	common.RedisSet("id_user", strconv.FormatUint(uint64(userModel.ID), 10), client)
+
+	common.SetUserRedis(loginValidator.User.Email, serializer.Response().Token)
+
 	c.JSON(http.StatusOK, gin.H{"user": serializer.Response()})
+}
+
+func UserLogout() {
+
 }
 
 func UserRetrieve(c *gin.Context) {

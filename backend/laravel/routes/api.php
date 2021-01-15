@@ -19,6 +19,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('users', 'AuthController@register');
 
     Route::get('user', 'UserController@index');
+    Route::get('logins', 'UserController@getLogins');
     Route::match(['put', 'patch'], 'user', 'UserController@update');
 
     Route::get('profiles/{user}', 'ProfileController@show');
