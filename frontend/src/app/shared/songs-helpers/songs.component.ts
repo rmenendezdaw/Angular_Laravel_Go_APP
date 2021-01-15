@@ -26,6 +26,7 @@ export class SongsComponent {
   results: Song[];
   loading = false;
   currentPage = 1;
+  songsCount = 0;
   totalPages: Array<number> = [1];
 
   setPageTo(pageNumber) {
@@ -52,12 +53,13 @@ export class SongsComponent {
       this.loading = false;
       
       if (this.query.type == "favorites") {
-          data.forEach(t => {
+          data.songs.forEach(t => {
             if (t.favorited == true) this.results.push(t)
           })
-      }else this.results = data;
+      }else this.results = data.songs;
 
-      // this.totalPages = Array.from(new Array(Math.ceil(data.songsCount / this.limit)), (val, index) => index + 1);
+      this.totalPages = Array.from(new Array(Math.ceil(data.songsCount / this.limit)), (val, index) => index + 1);
+
     });
   }
 
