@@ -3,6 +3,7 @@ package controllers
 import (
 	"goSongs/common"
 	"github.com/jinzhu/gorm"
+	
 	// "errors"
 	"fmt"
 	// "os"
@@ -17,8 +18,9 @@ func CreateSong(data interface{}) error {
 }
 
 //Get all
-func GetAllSongs(views, release_date, offset, limit string, data interface{}) error {
+func GetAllSongs(views, release_date, offset, limit string, data interface{}) (error, int) {
 	fmt.Println(data)
+	var count = 0
 	db := common.GetDB()
 
 	offset_int, err := strconv.Atoi(offset)
@@ -30,15 +32,19 @@ func GetAllSongs(views, release_date, offset, limit string, data interface{}) er
 	if err != nil {
 		limit_int = 20
 	}
+	
+	db.Model(data).Count(&count)
 
 	if (views != "") {
-		return db.Order("views " + views).Offset(offset_int).Limit(limit_int).Find(data).Error
+		err = db.Order("views " + views).Offset(offset_int).Limit(limit_int).Find(data).Error
 	}else if (release_date != "") {
-		return db.Order("views " + views).Offset(offset_int).Limit(limit_int).Find(data).Error
+		err = db.Order("views " + views).Offset(offset_int).Limit(limit_int).Find(data).Error
 	} else {
-		return db.Offset(offset_int).Limit(limit_int).Find(data).Error
+		err = db.Offset(offset_int).Limit(limit_int).Find(data).Error
 	}// end_else
 
+
+	return err, count
 	// return err
 }
 

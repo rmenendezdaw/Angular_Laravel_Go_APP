@@ -22,11 +22,8 @@ export class SongsService {
     .forEach((key) => {
       params[key] = query.filters[key];
     });
-
-    console.log(params);
-
-    return this.apiService.get('/songs', 'api_url', new HttpParams({ fromObject: params }))
-    .pipe(map(data => data.songs));
+    
+    return this.apiService.get('/songs', 'api_url', new HttpParams({ fromObject: params }));
   }// end_query
 
   get(id): Observable<Song> {

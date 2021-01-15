@@ -50,6 +50,7 @@ export class SongsComponent {
     }
     this.songsService.query(this.query)
     .subscribe(data => {
+      console.log(data);
       this.loading = false;
       
       if (this.query.type == "favorites") {

@@ -34,14 +34,14 @@ func SongList(c *gin.Context) {
 	fmt.Println(limit)
 
 	var song []models.Songs
-	err := controllers.GetAllSongs(views, release_date, offset, limit, &song)
+	err, count := controllers.GetAllSongs(views, release_date, offset, limit, &song)
 	
 	if err != nil {
 		c.JSON(http.StatusOK, "Not found")
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
 		serializer := models.SongsSerializer{c, song}
-		c.JSON(http.StatusOK, gin.H{"songs": serializer.Response()})
+		c.JSON(http.StatusOK, gin.H{"songs": serializer.Response(), "songsCount": count})
 	}
 }
 
