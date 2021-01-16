@@ -31,9 +31,6 @@ class UserController extends ApiController
         return $this->respondWithTransformer(auth()->user());
     }
 
-    public function getLogins() {
-        return response() -> json(Redis::get('currentUsers'));
-    }// end_getLogins
 
     /**
      * Update the authenticated user and return the user if successful.

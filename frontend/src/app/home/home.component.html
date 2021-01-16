@@ -1,25 +1,38 @@
 <div class="home-page">
+
+  <owl-carousel-o *ngIf="admin != true" style="height: 400px;" [options]="customOptions">
+    <ng-template carouselSlide>
+      <img style="margin: -20% 0" src="/assets/images/portada1.png">
+    </ng-template>
+    <ng-template carouselSlide>
+      <img style="margin: -20% 0" src="/assets/images/portada2.jpeg">
+    </ng-template>
+    <ng-template carouselSlide>
+      <img style="margin: -20% 0" src="/assets/images/portada3.jpg">
+    </ng-template>
+  </owl-carousel-o>
+
   <div class="container page">
     <div class="row">
 
 
-        <div *ngIf = "admin != true">
-          <h1 class = "home-title">Most Viewed Songs</h1>
-          <app-songs [limit] = "10" [views] = "'desc'" [config] = "listConfig"></app-songs>
-        </div>
-        
-        <!-- <div *ngIf = "admin != true" style = "margin-left: 150px;">
+      <div *ngIf="admin != true">
+        <h1 class="home-title">Most Viewed Songs</h1>
+        <app-songs [limit]="10" [views]="'desc'" [config]="listConfig"></app-songs>
+      </div>
+
+      <!-- <div *ngIf = "admin != true" style = "margin-left: 150px;">
           <h1 class = "home-title">Recent Songs</h1>
           <app-songs [release_date] = "'desc'" [config] = "listConfig"></app-songs>
         </div> -->
 
-        <div class = "container-songs-admin" *ngIf="admin == true">
-          <app-songs-admin></app-songs-admin>
-        </div>
+      <div class="container-songs-admin" *ngIf="admin == true">
+        <app-songs-admin></app-songs-admin>
+      </div>
 
 
-        <!-- <app-article-list [limit]="10" [config]="listConfig"></app-article-list> -->
-        
+      <!-- <app-article-list [limit]="10" [config]="listConfig"></app-article-list> -->
+
 
       <!-- <div class="col-md-3">
         <div class="sidebar">

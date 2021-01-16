@@ -28,6 +28,12 @@ class AuthController extends ApiController
      * @param LoginUser $request
      * @return \Illuminate\Http\JsonResponse
      */
+
+    public function getLogins() {
+        return response() -> json(Redis::get('currentUsers'));
+    }// end_getLogins
+
+
     public function login(LoginUser $request)
     {
         $credentials = $request->only('user.email', 'user.password');
