@@ -1,18 +1,20 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Song, SongsService } from '../../../core';
+import { PanelService } from '../../../core';
 
 @Component({
-  selector: 'app-songs-admin',
-  templateUrl: './songs-admin.component.html',
-  styleUrls: ['./songs-admin.component.css']
+  selector: 'app-panel',
+  templateUrl: './panel.component.html'
 })
 export class PanelComponent implements OnInit {
   constructor(
-    private songsService: SongsService) { }
+    private panelService: PanelService) { }
 
-  results: Song[];
+  users: number;
 
   ngOnInit() {
-    console.log('hola');
+    this.panelService.get().subscribe(data => {
+      console.log(data);
+      this.users = data;
+    })
   }
 }

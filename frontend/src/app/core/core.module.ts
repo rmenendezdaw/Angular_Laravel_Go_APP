@@ -12,7 +12,8 @@ import {
   ProfilesService,
   TagsService,
   UserService,
-  SongsService
+  SongsService,
+  PanelService
 } from './services';
 
 @NgModule({
@@ -29,7 +30,8 @@ import {
     ProfilesService,
     TagsService,
     UserService,
-    SongsService
+    SongsService,
+    PanelService
   ],
   declarations: []
 })

@@ -13,6 +13,8 @@ import { SongsAdminComponent } from './admin-helpers/songs-admin/songs-admin.com
 import { UsersAdminComponent } from './admin-helpers/users-admin/users-admin.component';
 import { UsersAdminPreviewComponent } from './admin-helpers/users-admin/users-admin-preview.component';
 import { SongsAdminPreviewComponent } from './admin-helpers/songs-admin';
+import { PanelComponent } from './admin-helpers/panel/panel.component';
+
 
 @NgModule({
   imports: [
@@ -35,7 +37,8 @@ import { SongsAdminPreviewComponent } from './admin-helpers/songs-admin';
     SongsAdminComponent,
     SongsAdminPreviewComponent,
     UsersAdminComponent,
-    UsersAdminPreviewComponent
+    UsersAdminPreviewComponent,
+    PanelComponent
   ],
   exports: [
     ArticleListComponent,
@@ -55,7 +58,8 @@ import { SongsAdminPreviewComponent } from './admin-helpers/songs-admin';
     SongsAdminComponent,
     SongsAdminPreviewComponent,
     UsersAdminComponent,
-    UsersAdminPreviewComponent
+    UsersAdminPreviewComponent,
+    PanelComponent
   ]
 })
 export class SharedModule {}
