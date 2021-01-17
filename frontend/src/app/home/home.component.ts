@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
   currentUser: User;
   type: String;
   admin = false;
-  data= "songs";
+  data = "songs";
 
   ngOnInit() {
     this.userService.currentUser.subscribe(

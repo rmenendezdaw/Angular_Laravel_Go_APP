@@ -18,43 +18,44 @@
         <div class="articles-toggle">
           <ul class="nav nav-pills outline-active">
             <li class="nav-item">
-              <a (click) = "setTabTo('songs')" class="nav-link">
-                 Songs
+              <a (click)="setTabTo('songs')" class="nav-link">
+                Songs
               </a>
             </li>
             <li class="nav-item">
-              <a (click) = "setTabTo('users')" class="nav-link">
-                 Users
+              <a (click)="setTabTo('users')" class="nav-link">
+                Users
               </a>
             </li>
           </ul>
         </div>
-    </div>
-    <div class="row">
-
-
-      <div *ngIf="admin != true">
-        <h1 class="home-title">Most Viewed Songs</h1>
-        <app-songs [limit]="10" [views]="'desc'" [config]="listConfig"></app-songs>
       </div>
+    </div>
+      <div class="row">
 
-      <!-- <div *ngIf = "admin != true" style = "margin-left: 150px;">
+
+        <div *ngIf="admin != true">
+          <h1 class="home-title">Most Viewed Songs</h1>
+          <app-songs [limit]="10" [views]="'desc'" [config]="listConfig"></app-songs>
+        </div>
+
+        <!-- <div *ngIf = "admin != true" style = "margin-left: 150px;">
           <h1 class = "home-title">Recent Songs</h1>
           <app-songs [release_date] = "'desc'" [config] = "listConfig"></app-songs>
         </div> -->
 
-        
-
-      <div class="container-songs-admin" *ngIf="admin == true">
-        <app-songs-admin *ngIf = "data == 'songs'"></app-songs-admin>
-        <app-users-admin *ngIf = "data == 'users'"></app-users-admin>
-      </div>
 
 
-      <!-- <app-article-list [limit]="10" [config]="listConfig"></app-article-list> -->
+        <div class="container-songs-admin" *ngIf="admin == true">
+          <app-songs-admin *ngIf="data == 'songs'"></app-songs-admin>
+          <app-users-admin *ngIf="data == 'users'"></app-users-admin>
+        </div>
 
 
-      <!-- <div class="col-md-3">
+        <!-- <app-article-list [limit]="10" [config]="listConfig"></app-article-list> -->
+
+
+        <!-- <div class="col-md-3">
         <div class="sidebar">
           <p>Popular Tags</p>
 
@@ -76,6 +77,6 @@
         </div>
       </div> -->
 
+      </div>
     </div>
   </div>
-</div>
