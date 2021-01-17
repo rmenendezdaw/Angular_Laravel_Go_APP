@@ -7,7 +7,7 @@ import (
 	"goUsers/common"
 	"net/http"
 	"github.com/gin-gonic/gin"
-
+	"strconv"
 )
 
 func ProfileRetrieve(c *gin.Context) {
@@ -105,8 +105,17 @@ func UsersLogin(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"user": serializer.Response()})
 }
 
-func UserLogout() {
+func UserLogout(c *gin.Context) {
+	client := common.NewRedisClient()
+	err, users := common.RedisGet("currentUsers", client)
 
+	usersInt, err := strconv.Atoi(users)
+	fmt.Println(err)
+
+	c.Set("my_user_model", 0)
+	c.Set("my_user_id", 0)
+	common.RedisSet("currentUsers", usersInt - 1 , client)
+	c.JSON(http.StatusOK, gin.H{"response": "fine"})
 }
 
 func UserRetrieve(c *gin.Context) {
