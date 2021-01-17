@@ -13,6 +13,23 @@
   </owl-carousel-o>
 
   <div class="container page">
+    <div *ngIf="admin == true">
+      <div class="col-xs-12 col-md-10 offset-md-1">
+        <div class="articles-toggle">
+          <ul class="nav nav-pills outline-active">
+            <li class="nav-item">
+              <a (click) = "setTabTo('songs')" class="nav-link">
+                 Songs
+              </a>
+            </li>
+            <li class="nav-item">
+              <a (click) = "setTabTo('users')" class="nav-link">
+                 Users
+              </a>
+            </li>
+          </ul>
+        </div>
+    </div>
     <div class="row">
 
 
@@ -26,8 +43,11 @@
           <app-songs [release_date] = "'desc'" [config] = "listConfig"></app-songs>
         </div> -->
 
+        
+
       <div class="container-songs-admin" *ngIf="admin == true">
-        <app-songs-admin></app-songs-admin>
+        <app-songs-admin *ngIf = "data == 'songs'"></app-songs-admin>
+        <app-users-admin *ngIf = "data == 'users'"></app-users-admin>
       </div>
 
 

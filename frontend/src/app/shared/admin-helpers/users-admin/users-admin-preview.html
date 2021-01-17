@@ -1,0 +1,24 @@
+<div class="meta-song-card">
+    <div class="song-meta row-song">
+        <div class="container-song-list">
+            <div class="ite">
+                <div>
+                    <section>ID: {{ user.id }}</section>
+                    <section>Email: {{ user.email }}</section>
+                    <section>Username: {{ user.username }}</section>
+                    <section>Type: {{ user.type }}</section>
+                </div>
+                <section class="btn-card">
+
+                    <a class = "nav-link btn-card--delete" (click) = "deleteUser($event)">
+                        <i class="ion-trash-a"></i> Delete
+                    </a>
+                    <a class="nav-link  btn-card--modify" (click)="modifySong($event, user.email)">
+                        <i class="ion-edit"></i> Modify
+                    </a>
+                </section>
+            </div>
+        </div>
+    </div>
+
+</div>

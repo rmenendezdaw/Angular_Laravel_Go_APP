@@ -65,6 +65,10 @@ export class UserService {
       );
   }
 
+  getAllUsers(): Observable<User[]> {
+    return this.apiService.get('/users', 'laravel_be').pipe(map(data => data.users));
+  }
+
   setAuth(user: User) {
     // Save JWT sent from server in localstorage
     this.jwtService.saveToken(user.token);
@@ -110,6 +114,10 @@ export class UserService {
       this.currentUserSubject.next(data.user);
       return data.user;
     }));
+  }
+
+  destroy(user) {
+    return this.apiService.delete('/users/' + user);
   }
 
 }

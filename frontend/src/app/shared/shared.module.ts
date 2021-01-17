@@ -11,6 +11,7 @@ import { ListErrorsComponent } from './list-errors.component';
 import { ShowAuthedDirective } from './show-authed.directive';
 import { SongsAdminComponent } from './admin-helpers/songs-admin/songs-admin.component';
 import { UsersAdminComponent } from './admin-helpers/users-admin/users-admin.component';
+import { UsersAdminPreviewComponent } from './admin-helpers/users-admin/users-admin-preview.component';
 import { SongsAdminPreviewComponent } from './admin-helpers/songs-admin';
 
 @NgModule({
@@ -33,8 +34,8 @@ import { SongsAdminPreviewComponent } from './admin-helpers/songs-admin';
     SongsPreviewComponent,
     SongsAdminComponent,
     SongsAdminPreviewComponent,
-    UsersAdminComponent
-
+    UsersAdminComponent,
+    UsersAdminPreviewComponent
   ],
   exports: [
     ArticleListComponent,
@@ -53,7 +54,8 @@ import { SongsAdminPreviewComponent } from './admin-helpers/songs-admin';
     SongsPreviewComponent,
     SongsAdminComponent,
     SongsAdminPreviewComponent,
-    UsersAdminComponent
+    UsersAdminComponent,
+    UsersAdminPreviewComponent
   ]
 })
 export class SharedModule {}

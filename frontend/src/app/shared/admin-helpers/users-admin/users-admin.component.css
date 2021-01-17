@@ -1,0 +1,30 @@
+.meta-song-card {
+    width: 250px;
+    height: 150px;
+    flex: 1;
+    align-content: space-between;
+}
+
+.song-meta {
+    width: 220px;
+    height: 220px;
+}
+
+.btn-card {
+    margin-top: 15px;
+    /* display: flex; */
+    text-align: center;
+}
+
+.btn-card a {
+    padding: 5px;
+    transition:all 0.3s ease;
+}
+
+.btn-card--delete:hover {
+    color: red;
+}
+
+.btn-card--modify:hover {
+    color: #1a49b1;
+}

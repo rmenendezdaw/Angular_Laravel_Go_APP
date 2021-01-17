@@ -1,3 +1,6 @@
-<p>
-  users-admin works!
-</p>
+<div class = "row-container">
+  <app-users-admin-preview
+    *ngFor="let user of results"
+    [user]="user">
+  </app-users-admin-preview>
+</div>

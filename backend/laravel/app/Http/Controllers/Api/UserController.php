@@ -6,6 +6,7 @@ use App\Http\Requests\Api\UpdateUser;
 use App\RealWorld\Transformers\UserTransformer;
 
 use Redis;
+use App\User;
 
 class UserController extends ApiController
 {
@@ -29,6 +30,24 @@ class UserController extends ApiController
     public function index()
     {
         return $this->respondWithTransformer(auth()->user());
+    }
+
+    public function getUsers() {
+        // $songs = Song::all();
+
+        $users = User::all();
+
+        return $this -> respondWithTransformer($users);
+    }
+
+    public function delete($id) {
+        $user = User::find($id);
+        
+        if (!$user) return response() -> json('Not Found');
+
+        $user -> delete();
+
+        return $this -> respondSuccess();
     }
 
 

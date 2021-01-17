@@ -17,6 +17,8 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::post('users/login', 'AuthController@login');
     Route::post('users', 'AuthController@register');
+    Route::get('users', 'UserController@getUsers');
+    Route::delete('users/{user}', 'UserController@delete');
 
     Route::get('user', 'UserController@index');
     Route::get('logins', 'AuthController@getLogins');

@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
   currentUser: User;
   type: String;
   admin = false;
+  data= "songs";
 
   ngOnInit() {
     this.userService.currentUser.subscribe(
@@ -71,5 +72,9 @@ export class HomeComponent implements OnInit {
 
     // Otherwise, set the list object
     this.listConfig = {type: type, filters: filters};
+  }
+
+  setTabTo(data: string) {
+    this.data = data;
   }
 }
