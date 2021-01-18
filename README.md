@@ -1,11 +1,11 @@
 ## PlayIt
 
-### Web aplication with Go, Laravel
+### Web aplication with Go, Laravel, Angular, Redis.
 
 ### Index:
 - About this project
-- Get started
 - Architecture
+- Get started
 - Libraries
 - Tools
 
@@ -19,6 +19,27 @@ PlayIt is a web application to view songs and create lists to keep track of your
 It has an administrator panel to create, modify and delete songs.
 
 This application is configured with docker, which means that it will be easier to launch.
+
+### Architecture
+
+Built with:
+
+#### Backend
+- Go v1.5
+- Laravel v7
+#### Frontend
+- Angular v11.0.2
+#### Database
+- Mysql v5.7
+#### Database cache
+- Redis v4.0
+#### Metrics&Monitoring
+- Traefik v2.3
+- Prometheus v2.20.1
+- Grafana v7.1.5
+#### Version Control
+- Github
+
 
 ### Get started
 
@@ -53,26 +74,6 @@ Go to the frontend directory and execute:
 
 1. npm install
 2. npm start
-
-### Architecture
-
-Built with:
-
-#### Backend
-- Go v1.5
-- Laravel v7
-#### Frontend
-- Angular v11.0.2
-#### Database
-- Mysql v5.7
-#### Database cache
-- Redis v4.0
-#### Metrics&Monitoring
-- Traefik v2.3
-- Prometheus v2.20.1
-- Grafana v7.1.5
-#### Version Control
-- Github
 
 ### Libraries
 
