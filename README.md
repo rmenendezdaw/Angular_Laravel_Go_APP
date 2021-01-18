@@ -6,7 +6,7 @@
 - About this project
 - Get started
 - Architecture
-- Other technologies
+- Libraries
 - Tools
 
 ### About this project
@@ -24,11 +24,11 @@ This application is configured with docker, which means that it will be easier t
 
 In order to start this application, you must follow the following steps:
 
-- #### Step 1
+#### Step 1
 
 Clone this repository https://github.com/rmenendezdaw/Angular_Laravel_Go_APP.git.
 
-- #### Step 2
+#### Step 2
 
 If you are using a service that has the following ports you will have to stop it:
 
@@ -43,11 +43,11 @@ If you are using a service that has the following ports you will have to stop it
 
 Command to stop services: "sudo service *myService* stop".
 
-- #### Step 3
+#### Step 3
 
 Execute this command: "sudo docker-compose up --build".
 
-- #### Step 4
+#### Step 4
 
 Go to the frontend directory and execute:
 
@@ -74,7 +74,7 @@ Built with:
 #### Version Control
 - Github
 
-### Other technologies
+### Libraries
 
 - JWT
 - GORM
