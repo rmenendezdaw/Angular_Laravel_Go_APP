@@ -48,6 +48,8 @@ export class SongsComponent {
       this.query.filters.limit = this.limit;
       this.query.filters.offset =  (this.limit * (this.currentPage - 1));
     }
+
+    console.log(this.query);
     this.songsService.query(this.query)
     .subscribe(data => {
       console.log(data);
@@ -55,6 +57,7 @@ export class SongsComponent {
       
       if (this.query.type == "favorites") {
           data.songs.forEach(t => {
+            // console.log(t);
             if (t.favorited == true) this.results.push(t)
           })
       }else this.results = data.songs;

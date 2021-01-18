@@ -22,6 +22,7 @@ func GetAllSongs(views, release_date, offset, limit string, data interface{}) (e
 	fmt.Println(data)
 	var count = 0
 	db := common.GetDB()
+	db.Model(data).Count(&count)
 
 	offset_int, err := strconv.Atoi(offset)
 	if err != nil {
@@ -30,10 +31,9 @@ func GetAllSongs(views, release_date, offset, limit string, data interface{}) (e
 
 	limit_int, err := strconv.Atoi(limit)
 	if err != nil {
-		limit_int = 20
+		limit_int = count
 	}
 	
-	db.Model(data).Count(&count)
 
 	if (views != "") {
 		err = db.Order("views " + views).Offset(offset_int).Limit(limit_int).Find(data).Error
