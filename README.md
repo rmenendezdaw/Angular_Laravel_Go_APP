@@ -4,6 +4,7 @@
 
 ### Index:
 - About this project
+- Things to keep in mind
 - Architecture
 - Get started
 - Libraries
@@ -13,12 +14,21 @@
 
 This project is carried out by two students of the ies l'Estacio of the second year of the upper cycle in Web Application Development.
 
-Done in seven weeks.
+Done in eight weeks.
 
 PlayIt is a web application to view songs and create lists to keep track of your musical tastes.
 It has an administrator panel to create, modify and delete songs.
 
 This application is configured with docker, which means that it will be easier to launch.
+
+### Things to keep in mind
+
+In the Laravel backend root directory we create a file called ".env". 
+Next we copy the content of the file ".example.env" and paste it in the file ".env" created.
+
+Finally we delete the line in which it says: 
+- CORS_ALLOWED_ORIGINS=http://localhost/:3000,http//localhost:4200
+
 
 ### Architecture
 
